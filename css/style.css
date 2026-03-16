@@ -1,8 +1,9 @@
-/* --- Global --- */
+/* --- global --- */
 
 * {
     box-sizing: border-box;
     font-family: "Inter", sans-serif;
+    text-transform: capitalize;
 }
 
 html, body {
@@ -29,14 +30,7 @@ button {
 }
 
 
-/* --- Layout --- */
-
-header {
-    position: sticky;
-    top: 0;
-    background-color: #141414;
-    z-index: 1;
-}
+/* --- layout --- */
 
 .container {
     display: grid;
@@ -45,7 +39,6 @@ header {
 }
 
 .main {
-    text-align: center;
     padding-right: 40px;
 
 }
@@ -66,7 +59,40 @@ section {
     gap: 15px;
 }
 
-/* --- Navigation --- */
+/* --- header --- */
+
+header {
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    background-color: #141414;
+    z-index: 1;
+    padding: 10px 0;
+}
+
+.search {
+    border-radius: 20px;
+    width: 500px;
+    padding: 10px;
+    border: none;
+    color: white;
+    background-color: #202020;
+}
+
+#loginBtn {
+    color: black;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    width: 150px;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    align-self: self-end;
+}
+
+/* --- nav --- */
 
 nav {
     position: sticky;
@@ -118,29 +144,11 @@ nav li a{
 
 }
 
-nav li:nth-child(3) {
-    margin-bottom: 50px;
-}
-
 nav .active, nav li a:hover {
     color: white;
 }
 
-/* --- Search --- */
-
-.search {
-    border-radius: 20px;
-    width: 500px;
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    border: none;
-    color: white;
-    background-color: #202020;
-}
-
-
-/* --- Card --- */
+/* --- card --- */
 
 .card {
     position: relative;
@@ -157,7 +165,7 @@ nav .active, nav li a:hover {
     opacity: 80%;
 }
 
-/* --- Card Variations --- */
+/* --- card variations --- */
 
 .card--release {
     display: flex;
@@ -201,9 +209,38 @@ nav .active, nav li a:hover {
     border-radius: 50%;
 }
 
+/* --- profile --- */
+
+.banner {
+    display: flex;
+    justify-content: left;
+}
+
+.banner img{
+    width: 300px;
+    border-radius: 50%;
+}
+
+.banner div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 0;
+    padding-left: 20px;
+}
+
+.banner h2 {
+    font-weight: 200;  
+}
+
+
+
+
 @media (max-width: 1200px) {
 
-    /* --- Layout --- */
+    /* --- layout --- */
+
+    .logo 
 
     .container {
         grid-template-columns: 350px 1fr;
@@ -221,21 +258,24 @@ nav .active, nav li a:hover {
 
 @media (max-width: 900px) {
 
-    /* --- Layout --- */
+    /* --- layout --- */
 
      .container {
         grid-template-columns: 75px 1fr;
     }
 
-    /* --- Navigation --- */
+    /* --- nav --- */
 
-    .logo {
-
+    nav h1, .logo img{
+        display: none;
     }
 
     nav {
         justify-content: center;
+    
     }
+
+    .nav-icon {}
 
     .nav-label {
         display: none;
