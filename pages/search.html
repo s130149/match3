@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl-BE">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">    
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/search.css">
-    <title>Find Song</title>
+    <title>nummer zoeken</title>
 </head>
 <body>
     <div class="container">
@@ -20,46 +19,111 @@
            <ul>
                 <li>
                     <a href="index.html">
-                        <img src="../images/icons/home.png" alt="Home icon" class="nav-icon">
-                        <span class="nav-label">Home</span>
+                        <img src="../images/icons/home.png" alt="Home icoon" class="nav-icon">
+                        <span class="nav-label">home</span>
                     </a>
                 </li>
                 <li>
                     <a href="profile.html">
-                        <img src="../images/icons/profile.png" alt="Profile icon" class="nav-icon">
-                        <span class="nav-label">Profile</span>
+                        <img src="../images/icons/profile.png" alt="Profiel icoon" class="nav-icon">
+                        <span class="nav-label">profiel</span>
                     </a>
                 </li>
                 <li>
                     <a href="library.html">
-                        <img src="../images/icons/library.png" alt="Library icon" class="nav-icon">
-                        <span class="nav-label">Library</span>
+                        <img src="../images/icons/library.png" alt="Bibliotheek icoon" class="nav-icon">
+                        <span class="nav-label">bibliotheek</span>
+                    </a>    
                 </li>
                 <li>
-                    <a href="find-song.html">
-                        <img src="../images/icons/find-song.png" alt="Find-Song icon" class="nav-icon">
-                        <span class="nav-label">Find Song</span>
+                    <a href="find-song.html" class="active">
+                        <img src="../images/icons/find-song.png" alt="Zoeken icoon" class="nav-icon">
+                        <span class="nav-label">nummer zoeken</span>
                     </a>
                 </li>
                 <li>
                     <a href="generate.html">
-                        <img src="../images/icons/mood.png" alt="Mood icon" class="nav-icon">
-                        <span class="nav-label">Mood</span>
+                        <img src="../images/icons/mood.png" alt="Mood icoon" class="nav-icon">
+                        <span class="nav-label">mood</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../pages/compare.html">
-                        <img src="../images/icons/compare.png" alt="Compare icon" class="nav-icon">
-                        <span class="nav-label">Compare</span>
+                    <a href="compare.html">
+                        <img src="../images/icons/compare.png" alt="Vergelijken icoon" class="nav-icon">
+                        <span class="nav-label">vergelijken</span>
                     </a>
                 </li>
            </ul>
         </nav>
-        <main class="main">
-            <header>
-                <input type="search" class="search" placeholder="Search">
-            </header>
+        <main class="search-layout">
+            <section class="search-content">
+                <header class="search-header">
+                    <input type="search" class="search" placeholder="zoeken">
+                </header>
+                <section class="search-results">
+                    <h2>topresultaten</h2>
+                    <div class="top-results">
+                        <div class="card card--top"></div>
+                        <div class="card card--top"></div>
+                        <div class="card card--top"></div>
+                        <div class="card card--top"></div>
+                        <div class="card card--top"></div>
+                        <div class="card card--top"></div>
+                    </div>
+                </section>
+                <section class="search-artists">
+                    <h2>artiesten</h2>
+                    <div class="artists">
+                        <div class="card card--artist">
+                            <div class="artist-placeholder"></div>
+                            <h3>naam artiest</h3>
+                        </div>
+                        <div class="card card--artist">
+                            <div class="artist-placeholder"></div>
+                            <h3>naam artiest</h3>
+                        </div>
+                        <div class="card card--artist">
+                            <div class="artist-placeholder"></div>
+                            <h3>naam artiest</h3>
+                        </div>
+                        <div class="card card--artist">
+                            <div class="artist-placeholder"></div>
+                            <h3>naam artiest</h3>
+                        </div>
+                        <div class="card card--artist">
+                            <div class="artist-placeholder"></div>
+                            <h3>naam artiest</h3>
+                        </div>
+                        <div class="card card--artist">
+                            <div class="artist-placeholder"></div>
+                            <h3>naam artiest</h3>
+                        </div>                                        
+                    </div>
+                </section>          
+            </section>
+            <aside class="detail-panel">
+                <h2>details</h2>
+                <div class="detail-image"></div>
+                <div class="detail-info">
+                    <h3 class="song-title">naam nummer</h3>
+                    <p>naam artiest</p>
+                    <div class="detail-meta">
+                        <span>album</span>
+                        <span>releasedatum</span>
+                    </div>
+                    <h3>info artiest</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </aside>
         </main>
     </div>
+    <footer class="player-bar">
+        <div class="player-controls">
+            <span>♡</span>
+            <span>⏮</span>
+            <span>▶</span>
+            <span>⏭</span>
+        </div>
+    </footer>
 </body>
 </html>
