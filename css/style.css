@@ -1,243 +1,289 @@
 /* --- Global --- */
 
 * {
-    box-sizing: border-box;
-    font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    background-color: #141414;
-    color: white;
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background-color: #141414;
+  color: white;
 }
 
 h2 {
-    text-align: left;
+  text-align: left;
 }
 
 h3 {
-    font-size: 1rem;
-    font-weight: 400;
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 button {
-    all: unset;
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
+  all: unset;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
 }
-
 
 /* --- Layout --- */
 
 header {
-    position: sticky;
-    top: 0;
-    background-color: #141414;
-    z-index: 1;
+  position: sticky;
+  top: 0;
+  background-color: #141414;
+  z-index: 1;
 }
 
 .container {
-    display: grid;
-    grid-template-columns: 350px 1fr;
-    min-height: 100vh;
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  min-height: 100vh;
 }
 
 .main {
-    text-align: center;
-    padding-right: 40px;
-
+  text-align: center;
+  padding-right: 40px;
 }
 
 section {
-    padding-bottom: 40px;
+  padding-bottom: 40px;
 }
 
 .releases {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
 
-.recommendations, .artists {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 15px;
+.recommendations,
+.artists {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px;
 }
 
 /* --- Navigation --- */
 
 nav {
-    position: sticky;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
 }
 
 nav ul {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    list-style: none;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  list-style: none;
+  gap: 12px;
 }
 
 .nav-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  vertical-align: middle;
 }
 
-nav h1{
-    font-size: 28px;
-    font-weight: 500;
-    padding-left: 20px;
+nav h1 {
+  font-size: 28px;
+  font-weight: 500;
+  padding-left: 20px;
 }
 
 .logo {
-    display: flex;
-    align-items: center;
-    padding-left: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 40px;
 }
 
-.logo img{
-    width: 50px;
-    height: 50px;
-    vertical-align: middle;
+.logo img {
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;
 }
 
-nav li a{
-    display: flex;
-    color: rgb(212, 212, 212);
-    font-size: 20px;
-    text-decoration: none;
-
+nav li a {
+  display: flex;
+  color: rgb(212, 212, 212);
+  font-size: 20px;
+  text-decoration: none;
 }
 
 nav li:nth-child(3) {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 }
 
-nav .active, nav li a:hover {
-    color: white;
+nav .active,
+nav li a:hover {
+  color: white;
 }
 
 /* --- Search --- */
 
 .search {
-    border-radius: 20px;
-    width: 500px;
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    border: none;
-    color: white;
-    background-color: #202020;
+  border-radius: 20px;
+  width: 500px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: none;
+  color: white;
+  background-color: #202020;
 }
-
 
 /* --- Card --- */
 
 .card {
-    position: relative;
+  position: relative;
 }
 
 .card img {
   width: 100%;
-  aspect-ratio: 1 / 1; 
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   background-color: #fff;
 }
 
 .card img:hover {
-    opacity: 80%;
+  opacity: 80%;
 }
 
 /* --- Card Variations --- */
 
 .card--release {
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  border-radius: 12px;
 }
 
-.card--release .card-content{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 65px;
-    backdrop-filter: blur(10px);
-    background: rgba(0, 0, 0, 0.4); 
+.card--release .card-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 65px;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .card--recommendation {
-    text-align: left;
+  text-align: left;
 }
 
-.card--recommendation img{
-    border-radius: 12px;
+.card--recommendation img {
+  border-radius: 12px;
 }
 
 .card--artist {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .card--artist img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 50%;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 @media (max-width: 1200px) {
+  /* --- Layout --- */
 
-    /* --- Layout --- */
+  .container {
+    grid-template-columns: 350px 1fr;
+  }
 
-    .container {
-        grid-template-columns: 350px 1fr;
-    }
+  .releases {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-    .releases {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .recommendations,
+  .artists {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
-    .recommendations, .artists {
-        grid-template-columns: repeat(3, 1fr);
-    }
+.vergelijking-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 100px 10%;
+  margin-top: 10rem;
+  align-items: center;
+}
 
+.toevoegen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+}
+
+.toevoegen:hover {
+  transform: scale(1.05);
+}
+
+.toevoegen:hover .plus-cirkel {
+  border-color: #1db954;
+  background-color: #2a2a2a;
+}
+
+.plus-cirkel {
+  width: 220px;
+  aspect-ratio: 1 / 1;
+  background-color: #202020;
+  border: 2px dashed #444;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.plus-icoon {
+  font-size: 5rem;
+  font-weight: 200;
+  color: white;
+}
+
+.toevoegen p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #b3b3b3;
 }
 
 @media (max-width: 900px) {
+  /* --- Layout --- */
 
-    /* --- Layout --- */
+  .container {
+    grid-template-columns: 75px 1fr;
+  }
 
-     .container {
-        grid-template-columns: 75px 1fr;
-    }
+  /* --- Navigation --- */
 
-    /* --- Navigation --- */
+  .logo {
+  }
 
-    .logo {
+  nav {
+    justify-content: center;
+  }
 
-    }
-
-    nav {
-        justify-content: center;
-    }
-
-    .nav-label {
-        display: none;
-    }
+  .nav-label {
+    display: none;
+  }
 }

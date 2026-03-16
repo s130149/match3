@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/compare.css">
-    <title>Compare</title>
+    <script src="../JavaScript/compare.js"></script>
+    <title>vergelijk</title>
 </head>
+
 <body>
     <div class="container">
         <nav>
@@ -17,7 +22,7 @@
                 <img src="../images/icons/logo.png" alt="Logo">
                 <h1>Music Match</h1>
             </div>
-           <ul>
+            <ul>
                 <li>
                     <a href="index.html">
                         <img src="../images/icons/home.png" alt="Home icon" class="nav-icon">
@@ -53,13 +58,32 @@
                         <span class="nav-label">Compare</span>
                     </a>
                 </li>
-           </ul>
+            </ul>
         </nav>
         <main class="main">
             <header>
-                <input type="search" class="search" placeholder="Search">
+                <div class="search-wrapper">
+                    <input type="search" class="search" placeholder="Search">
+                </div>
             </header>
+
+            <section class="vergelijking-grid">
+                <button class="toevoegen">
+                    <div class="plus-cirkel">
+                        <span class="plus-icoon">+</span>
+                    </div>
+                    <p>artiest/liedje toevoegen</p>
+                </button>
+
+                <button class="toevoegen">
+                    <div class="plus-cirkel">
+                        <span class="plus-icoon">+</span>
+                    </div>
+                    <p>artiest/lidje toevoegen</p>
+                </button>
+            </section>
         </main>
     </div>
 </body>
+
 </html>
