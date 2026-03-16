@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/library.css">
+    <title>Library</title>
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <img src="../images/icons/logo.png" alt="Logo">
+                <h1>Music Match</h1>
+            </div>
+            <ul>
+                <li>
+                    <a href="../index.html" class="active">
+                        <img src="../images/icons/home.png" alt="Home icon" class="nav-icon">
+                        <span class="nav-label">start</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../pages/profiel.html">
+                        <img src="../images/icons/profile.png" alt="Profile icon" class="nav-icon">
+                        <span class="nav-label">profiel</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../pages/collectie.html">
+                        <img src="../images/icons/library.png" alt="Library icon" class="nav-icon">
+                        <span class="nav-label">collectie</span>
+                </li>
+                <li>
+                    <a href="../pages/raad-liedje.html">
+                        <img src="../images/icons/find-song.png" alt="Find-Song icon" class="nav-icon">
+                        <span class="nav-label">raad liedje</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../pages/generator.html">
+                        <img src="../images/icons/mood.png" alt="Mood icon" class="nav-icon">
+                        <span class="nav-label">generator</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../pages/vergelijk.html">
+                        <img src="../images/icons/compare.png" alt="Compare icon" class="nav-icon">
+                        <span class="nav-label">vergelijk</span>
+                    </a>
+                </li>
+           </ul>
+        </nav>
+        <main class="main">
+             <header>
+                <input type="search" class="search" placeholder="Search">
+                <button id="loginBtn">aanmelden</button>
+            </header>
+            <section class="library-content">
+    
+    <!-- OVERZICHT -->
+    <div id="overzicht">
+
+    <h2>afspeellijsten</h2>
+    <section class="recommendations">
+        <button class="card card--recommendation" id="btn-gelikte-liedjes">
+            <img src="https://misc.scdn.co/liked-songs/liked-songs-300.png" alt="">
+            <div class="card-content">
+                <h3>gelikte liedjes</h3>
+            </div>
+        </button>
+        <button class="card card--recommendation" id="btn-afspeellijst-1">
+            <img src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png" alt="">
+            <div class="card-content">
+                <h3>afspeellijst 1</h3>
+            </div>
+        </button>
+    </section>
+
+    <h2>gevolgde albums</h2>
+    <section class="recommendations">
+        <button class="card card--recommendation" id="btn-album-1">
+            <img src="../images/after.png" alt="">
+            <div class="card-content">
+                <h3>After Hours</h3>
+                <h3>The Weeknd</h3>
+            </div>
+        </button>
+        <button class="card card--recommendation" id="btn-album-2">
+            <img src="../images/scorpion.jpg" alt="">
+            <div class="card-content">
+                <h3>Scorpion</h3>
+                <h3>Drake</h3>
+            </div>
+        </button>
+        <button class="card card--recommendation" id="btn-album-3">
+            <img src="../images/future.jfif" alt="">
+            <div class="card-content">
+                <h3>Future Nostalgia</h3>
+                <h3>Dua Lipa</h3>
+            </div>
+        </button>
+    </section>
+
+    <h2>gevolgde artiesten</h2>
+    <section class="artists">
+        <button class="card card--artist" id="btn-artiest-1">
+            <img src="../images/theweekend.jpg" alt="">
+            <div class="card-content">
+                <h3>The Weeknd</h3>
+            </div>
+        </button>
+        <button class="card card--artist" id="btn-artiest-2">
+            <img src="../images/drake.jpg" alt="">
+            <div class="card-content">
+                <h3>Drake</h3>
+            </div>
+        </button>
+        <button class="card card--artist" id="btn-artiest-3">
+            <img src="../images/dualipa.jpg" alt="">
+            <div class="card-content">
+                <h3>Dua Lipa</h3>
+            </div>
+        </button>
+    </section>
+
+</div>
+
+<div id="playlist-view" style="display: none;">
+    <button id="terug-btn">terug</button>
+    <h2 id="playlist-titel"></h2>
+    <section id="playlist-liedjes">
+        <p>Geen liedjes in deze afspeellijst.</p>
+    </section>
+</div>
+
+</section>
+        </main>
+</body>
+
+</html>
+<script type="module" src="../js/app.js"></script>
+<script type="module" src="../js/auth.js"></script>
+<script type="module" src="../js/collectie.js"></script>
+

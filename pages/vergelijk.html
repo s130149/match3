@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/generate.css">
-    <title>Generate</title>
+    <link rel="stylesheet" href="../css/compare.css">
+    <title>vergelijk</title>
 </head>
+
 <body>
     <div class="container">
         <nav>
@@ -42,13 +46,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="generate.html" class="active">
+                    <a href="generate.html">
                         <img src="../images/icons/mood.png" alt="Mood icon" class="nav-icon">
                         <span class="nav-label">Mood</span>
                     </a>
                 </li>
                 <li>
-                    <a href="compare.html">
+                    <a href="compare.html" class="active">
                         <img src="../images/icons/compare.png" alt="Compare icon" class="nav-icon">
                         <span class="nav-label">Compare</span>
                     </a>
@@ -57,11 +61,44 @@
         </nav>
         <main class="main">
             <header>
-                <input type="search" class="search" placeholder="Search">
+                <div class="search-wrapper">
+                    <input type="search" class="search" placeholder="Search">
+                </div>
             </header>
-            <section>
+
+            <section class="vergelijking-grid">
+                <button class="toevoegen" onclick="openModal(0)">
+                    <div class="plus-cirkel">
+                        <span class="plus-icoon">+</span>
+                    </div>
+                    <p>artiest/liedje toevoegen</p>
+                </button>
+
+                <button class="toevoegen" onclick="openModal(1)">
+
+                    <div class="plus-cirkel">
+                        <span class="plus-icoon">+</span>
+                    </div>
+                    <p>artiest/lidje toevoegen</p>
+                </button>
             </section>
         </main>
     </div>
+
+    <div id="modal-overlay" class="modal-overlay" style="display: none;">
+  <div class="modal">
+    <div class="modal-header">
+      <p>Zoek een liedje</p>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <input id="modal-search" type="search" placeholder="Zoeken..." oninput="filterSongs(this.value)">
+        <div id="song-list"></div>
+        </div>
+    </div>
+
+<script type="module" src="../js/app.js"></script>
+<script type="module" src="../js/auth.js"></script>
+<script defer src="../js/vergelijk.js"></script>
 </body>
 </html>
+
