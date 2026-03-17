@@ -12,17 +12,9 @@ async function getInfo() {
   const response = await fetch("../json/dataset.json");
   const data = await response.json();
 
-  const releaseCards = document.querySelectorAll(".card--release");
+  // recommendations
+
   const recommendationCards = document.querySelectorAll(".card--recommendation");
-  const artistCards = document.querySelectorAll(".card--artist");
-
-  releaseCards.forEach((card, index) => {
-    const img = card.querySelector("img");
-    const title = card.querySelector("h3");
-
-    img.src = data.releases[index].image;
-    title.textContent = `${data.releases[index].artist} - ${data.releases[index].songTitle}`;
-  });
 
   recommendationCards.forEach((card, index) => {
     const img = card.querySelector("img");
@@ -33,12 +25,40 @@ async function getInfo() {
     titles[1].textContent = data.albums[index].artist;
   });
 
+  // artists 
+
+  const artistCards = document.querySelectorAll(".card--artist");
+
   artistCards.forEach((card, index) => {
     const img = card.querySelector("img");
     const title = card.querySelector("h3");
 
     img.src = data.artists[index].image;
     title.textContent = data.artists[index].name;
+  });
+
+  // releases
+
+  const releaseCards = document.querySelectorAll(".card--release");
+
+  releaseCards.forEach((card, index) => {
+    const img = card.querySelector("img");
+    const title = card.querySelector("h3");
+
+    img.src = data.releases[index].image;
+    title.textContent = `${data.releases[index].artist} - ${data.releases[index].songTitle}`;
+  });
+
+  // playlists
+
+  const playlistItems = document.querySelectorAll(".playlist-item");
+
+  playlistItems.forEach((item, index) => {
+    const title = item.querySelector(".playlist-item__titel");
+    const artist = item.querySelector(".playlist-item__artiest");
+
+    title.textContent = `${data.releases[index].songTitle}`;
+    artist.textContent = `${data.releases[index].artist}`;
   });
 }
 
