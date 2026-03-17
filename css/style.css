@@ -627,7 +627,7 @@ nav .active, nav li a:hover {
 
 .media-player {
     display: flex;
-    gap: 10px;
+    gap: 20px;
     padding-top: 50px;
 }
 
