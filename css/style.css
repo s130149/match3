@@ -426,7 +426,6 @@ nav .active, nav li a:hover {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    max-width: 900px;
     margin-top: 20px;
 }
 
@@ -469,7 +468,6 @@ nav .active, nav li a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 900px;
     margin-bottom: 30px;
 }
 
@@ -505,7 +503,6 @@ nav .active, nav li a:hover {
     list-style: none;
     padding: 0;
     margin: 0;
-    max-width: 900px;
     display: flex;
     flex-direction: column;
     gap: 8px;
