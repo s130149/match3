@@ -40,7 +40,6 @@ button {
 
 .main {
     padding-right: 40px;
-
 }
 
 section {
@@ -78,18 +77,6 @@ header {
     border: none;
     color: white;
     background-color: #202020;
-}
-
-#loginBtn {
-    color: black;
-    text-align: center;
-    position: absolute;
-    right: 0;
-    width: 150px;
-    padding: 10px;
-    background-color: rgb(255, 255, 255);
-    border-radius: 5px;
-    align-self: self-end;
 }
 
 /* --- nav --- */
@@ -145,6 +132,456 @@ nav li a{
 }
 
 nav .active, nav li a:hover {
+    color: white;
+}
+
+/* --- login --- */
+
+.welcome {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 20px;
+}
+
+#loginBtn {
+    color: black;
+    text-align: center;
+    width: 150px;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+}
+
+
+/* --- profile --- */
+
+.banner {
+    display: flex;
+    justify-content: left;
+}
+
+.banner img{
+    width: 300px;
+    border-radius: 50%;
+}
+
+.banner div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 0;
+    padding-left: 20px;
+}
+
+.banner h2 {
+    font-weight: 200;  
+}
+
+/* --- compare --- */
+
+.vergelijking-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 100px 10%;
+  margin-top: 10rem;
+  align-items: center;
+}
+
+.toevoegen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+}
+
+.toevoegen:hover {
+  transform: scale(1.05);
+}
+
+.toevoegen:hover .plus-cirkel {
+  border-color: #1db954;
+  background-color: #2a2a2a;
+}
+
+.plus-cirkel {
+  width: 220px;
+  aspect-ratio: 1 / 1;
+  background-color: #202020;
+  border: 2px dashed #444;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.plus-icoon {
+  font-size: 5rem;
+  font-weight: 200;
+  color: white;
+}
+
+.toevoegen p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #b3b3b3;
+}
+
+#playlist-view {
+  padding: 1rem 0;
+}
+
+#playlist-liedjes {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 1rem;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.track:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.track-number {
+  font-size: 13px;
+  color: #888;
+  width: 16px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.track img {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.track-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.track-name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-artist {
+  margin: 0;
+  font-size: 12px;
+  color: #888;
+}
+
+.like-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #888;
+  flex-shrink: 0;
+  padding: 4px 8px;
+  transition:
+    transform 0.15s,
+    color 0.15s;
+  line-height: 1;
+}
+
+.like-btn:hover {
+  transform: scale(1.2);
+  color: #e25555;
+}
+
+.like-btn.liked {
+  color: #e25555;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background-color: #202020;
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 420px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: white;
+}
+
+.modal-close {
+  font-size: 1.5rem;
+  color: #b3b3b3;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.modal-close:hover {
+  color: white;
+}
+
+#modal-search {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: none;
+  background-color: #2a2a2a;
+  color: white;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+#modal-search:focus {
+  outline: 2px solid #1db954;
+}
+
+#song-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.song-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background-color: #2a2a2a;
+  cursor: pointer;
+  transition: background 0.15s;
+  width: 100%;
+}
+
+.song-option:hover {
+  background-color: #333;
+  outline: 1px solid #1db954;
+}
+
+.song-option strong {
+  font-size: 0.95rem;
+  color: white;
+  font-weight: 500;
+}
+
+.song-option span {
+  font-size: 0.8rem;
+  color: #b3b3b3;
+  margin-top: 2px;
+}
+
+/* --- mood --- */
+
+.mood-section {
+    text-align: left;
+    padding-left: 40px;
+    margin-top: 30px;
+}
+
+.mood-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin-top: 20px;
+}
+
+.card--mood {
+    height: 130px;
+    background-color: #202020;
+    border-radius: 16px;
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.card--mood:hover {
+    background-color: #2a2a2a;
+}
+
+.card--mood.active {
+    outline: 2px solid white;
+}
+
+.mood-label {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    text-transform: lowercase;
+}
+
+/* --- playlist --- */
+
+
+.playlist-section {
+    text-align: left;
+    padding-left: 40px;
+    margin-top: 30px;
+    padding-bottom: 100px;
+}
+
+.playlist-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 900px;
+    margin-bottom: 30px;
+}
+
+.playlist-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+}
+
+.playlist-subtitle {
+    font-size: 13px;
+    color: #999;
+    margin: 0;
+}
+
+.btn-terug {
+    all: unset;
+    cursor: pointer;
+    font-size: 14px;
+    color: #999;
+    border: 1px solid #444;
+    border-radius: 20px;
+    padding: 8px 16px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-terug:hover {
+    color: white;
+    border-color: white;
+}
+
+.playlist-lijst {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.playlist-item {
+    display: grid;
+    grid-template-columns: 24px 48px 1fr auto auto;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background-color: #1a1a1a;
+    transition: background-color 0.2s ease;
+}
+
+.playlist-item:hover {
+    background-color: #242424;
+}
+
+.playlist-item__nummer {
+    font-size: 14px;
+    color: #777;
+    text-align: center;
+}
+
+.playlist-item__cover {
+    width: 48px;
+    height: 48px;
+    background-color: #d9d9d9;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.playlist-item__info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: hidden;
+}
+
+.playlist-item__titel {
+    font-size: 15px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.playlist-item__artiest {
+    font-size: 13px;
+    color: #999;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.playlist-item__duur {
+    font-size: 13px;
+    color: #777;
+}
+
+.playlist-item__opslaan {
+    all: unset;
+    cursor: pointer;
+    font-size: 18px;
+    color: #777;
+    transition: color 0.2s ease;
+}
+
+.playlist-item__opslaan:hover {
+    color: white;
+}
+
+.playlist-item__opslaan.opgeslagen {
     color: white;
 }
 
@@ -208,32 +645,6 @@ nav .active, nav li a:hover {
     object-fit: cover;
     border-radius: 50%;
 }
-
-/* --- profile --- */
-
-.banner {
-    display: flex;
-    justify-content: left;
-}
-
-.banner img{
-    width: 300px;
-    border-radius: 50%;
-}
-
-.banner div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    line-height: 0;
-    padding-left: 20px;
-}
-
-.banner h2 {
-    font-weight: 200;  
-}
-
-
 
 
 @media (max-width: 1200px) {

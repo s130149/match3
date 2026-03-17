@@ -20,14 +20,13 @@ const base64encode = (input) => {
     .replace(/\//g, '_');
 }
 
-async function authorizeSpotify() {
+export async function authorizeSpotify() {
     const scope = 'user-read-private user-read-email';
     const authUrl = new URL("https://accounts.spotify.com/authorize");
 
     const codeVerifier  = generateRandomString(64);
     const hashed = await sha256(codeVerifier)
     const codeChallenge = base64encode(hashed);
-
 
     window.localStorage.setItem('code_verifier', codeVerifier);
 
@@ -43,4 +42,108 @@ async function authorizeSpotify() {
     authUrl.search = new URLSearchParams(params).toString();
     window.location.href = authUrl.toString();
 }
+
+async function getAccessToken(code) {
+    const codeVerifier = localStorage.getItem('code_verifier');
+
+    const payload = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+            client_id: clientId,
+            grant_type: 'authorization_code',
+            code: code,
+            redirect_uri: redirectUri,
+            code_verifier: codeVerifier
+        })
+    };
+
+    let response = await fetch('https://accounts.spotify.com/api/token', payload);
+    const data = await response.json();
+
+    if (data.refresh_token) {
+      localStorage.setItem('refresh_token', data.refresh_token);
+    }
+
+    localStorage.setItem('access_token', data.access_token);
+    return data.access_token;
+}
+
+async function getRefreshToken(){
+   const refreshToken = localStorage.getItem('refresh_token');
+   const url = "https://accounts.spotify.com/api/token";
+
+    const payload = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken,
+        client_id: clientId
+      }),
+    }
+    const body = await fetch(url, payload);
+    let response = await body.json();
+
+    localStorage.setItem('access_token', response.access_token);
+    if (response.refresh_token) {
+      localStorage.setItem('refresh_token', response.refresh_token);
+    }
+
+    return response.access_token;
+}
+
+async function getProfile() {
+  let accessToken = localStorage.getItem('access_token');
+
+  let response = await fetch('https://api.spotify.com/v1/me', {
+    headers: {
+      Authorization: 'Bearer ' + accessToken
+    }
+  });
+
+  if (response.status === 401){
+    accessToken = await getRefreshToken();
+
+    response = await fetch('https://api.spotify.com/v1/me', {
+      headers: {
+        Authorization: 'Bearer ' + accessToken
+      }
+    });
+  }
+
+  const data = await response.json();
+  return data;
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+let code = urlParams.get('code');
+
+async function init() {
+  let accessToken = localStorage.getItem('access_token');
+
+  if (code) {
+    accessToken = await getAccessToken(code);
+
+    window.history.replaceState({}, document.title, redirectUri);
+
+     if (accessToken) {
+      window.location.href = "pages/home.html";
+      return;
+    }
+  }
+
+  if (accessToken) {
+    const profile = await getProfile();
+    console.log(profile);
+  } 
+}
+
+init();
+
+// https://developer.spotify.com/documentation/web-api/
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">    
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/generate.css">
-    <title>Generate</title>
+    <title>mood & playlist</title>
 </head>
 <body>
     <div class="container">
@@ -19,49 +18,188 @@
             </div>
             <ul>
                 <li>
-                    <a href="index.html">
-                        <img src="../images/icons/home.png" alt="Home icon" class="nav-icon">
-                        <span class="nav-label">Home</span>
+                    <a href="home.html">
+                        <img src="../images/icons/home.png" alt="home icon" class="nav-icon">
+                        <span class="nav-label">start</span>
                     </a>
                 </li>
                 <li>
                     <a href="profile.html">
-                        <img src="../images/icons/profile.png" alt="Profile icon" class="nav-icon">
-                        <span class="nav-label">Profile</span>
+                        <img src="../images/icons/profile.png" alt="profile icon" class="nav-icon">
+                        <span class="nav-label">profiel</span>
                     </a>
                 </li>
                 <li>
                     <a href="library.html">
-                        <img src="../images/icons/library.png" alt="Library icon" class="nav-icon">
-                        <span class="nav-label">Library</span>
+                        <img src="../images/icons/library.png" alt="library icon" class="nav-icon">
+                        <span class="nav-label">bibliotheek</span>
+                    </a>
                 </li>
                 <li>
-                    <a href="find-song.html">
-                        <img src="../images/icons/find-song.png" alt="Find-Song icon" class="nav-icon">
-                        <span class="nav-label">Find Song</span>
+                    <a href="guess-song.html">
+                        <img src="../images/icons/guess-song.png" alt="guess-Song icon" class="nav-icon">
+                        <span class="nav-label">liedje raden</span>
                     </a>
                 </li>
                 <li>
                     <a href="generate.html" class="active">
-                        <img src="../images/icons/mood.png" alt="Mood icon" class="nav-icon">
-                        <span class="nav-label">Mood</span>
+                        <img src="../images/icons/generate.png" alt="generate icon" class="nav-icon">
+                        <span class="nav-label">genereer</span>
                     </a>
                 </li>
                 <li>
                     <a href="compare.html">
                         <img src="../images/icons/compare.png" alt="Compare icon" class="nav-icon">
-                        <span class="nav-label">Compare</span>
+                        <span class="nav-label">vergelijken</span>
                     </a>
                 </li>
-            </ul>
+           </ul>
         </nav>
         <main class="main">
-            <header>
-                <input type="search" class="search" placeholder="Search">
+            <header class="search-header">
+                <input type="search" class="search" placeholder="zoeken">
             </header>
-            <section>
+            <!-- state 1 mood kiezen-->
+            <section class="mood-section" id="mood-section">
+                <h2>kies je mood</h2>
+                <div class="mood-grid">
+                    <button class="card card--mood" data-mood="chill">
+                        <span class="mood-label">chill</span>
+                    </button>
+                    <button class="card card--mood" data-mood="focus">
+                        <span class="mood-label">focus</span>
+                    </button>
+                    <button class="card card--mood" data-mood="party">
+                        <span class="mood-label">party</span>
+                    </button>
+                    <button class="card card--mood" data-mood="sad">
+                        <span class="mood-label">sad</span>
+                    </button>
+                    <button class="card card--mood" data-mood="workout">
+                        <span class="mood-label">workout</span>
+                    </button>
+                    <button class="card card--mood" data-mood="aangepast">
+                        <span class="mood-label">aangepast</span>
+                    </button>                                                                                                    
+                </div>
+            </section>
+            <!--state 2 playlist-->
+            <section class="playlist-section hidden" id="playlist-section">
+                <div class="playlist-header">
+                    <div>
+                        <h2 class="playlist-title">playlist: <span id="playlist-mood-label">chill</span></h2>
+                        <p class="playlist-subtitle">op basis van je huidige mood</p>
+                    </div>
+                    <button class="btn-terug" id="btn-terug">← andere mood kiezen</button>
+                </div>
+                <ul class="playlist-lijst" id="playlist-lijst">
+                    <li class="playlist-item">
+                        <span class="playlist-item__nummer">1</span>
+                        <div class="playlist-item__cover"></div>
+                        <div class="playlist-item__info">
+                            <span class="playlist-item__titel">naam nummer</span>
+                            <span class="playlist-item__artiest">naam artiest</span>
+                        </div>
+                        <span class="playlist-item__duur">3:24</span>
+                        <button class="playlist-item__opslaan" aria-label="opslaan">♡</button>
+                    </li>
+                    <li class="playlist-item">
+                        <span class="playlist-item__nummer">2</span>
+                        <div class="playlist-item__cover"></div>
+                        <div class="playlist-item__info">
+                            <span class="playlist-item__titel">naam nummer</span>
+                            <span class="playlist-item__artiest">naam artiest</span>
+                        </div>
+                        <span class="playlist-item__duur">4:01</span>
+                        <button class="playlist-item__opslaan" aria-label="opslaan">♡</button>
+                    </li>
+                    <li class="playlist-item">
+                        <span class="playlist-item__nummer">3</span>
+                        <div class="playlist-item__cover"></div>
+                        <div class="playlist-item__info">
+                            <span class="playlist-item__titel">naam nummer</span>
+                            <span class="playlist-item__artiest">naam artiest</span>
+                        </div>
+                        <span class="playlist-item__duur">2:58</span>
+                        <button class="playlist-item__opslaan" aria-label="opslaan">♡</button>
+                    </li>
+                    <li class="playlist-item">
+                        <span class="playlist-item__nummer">4</span>
+                        <div class="playlist-item__cover"></div>
+                        <div class="playlist-item__info">
+                            <span class="playlist-item__titel">naam nummer</span>
+                            <span class="playlist-item__artiest">naam artiest</span>
+                        </div>
+                        <span class="playlist-item__duur">3:45</span>
+                        <button class="playlist-item__opslaan" aria-label="opslaan">♡</button>
+                    </li>
+                    <li class="playlist-item">
+                        <span class="playlist-item__nummer">5</span>
+                        <div class="playlist-item__cover"></div>
+                        <div class="playlist-item__info">
+                            <span class="playlist-item__titel">naam nummer</span>
+                            <span class="playlist-item__artiest">naam artiest</span>
+                        </div>
+                        <span class="playlist-item__duur">3:12</span>
+                        <button class="playlist-item__opslaan" aria-label="opslaan">♡</button>
+                    </li>
+                    <li class="playlist-item">
+                        <span class="playlist-item__nummer">6</span>
+                        <div class="playlist-item__cover"></div>
+                        <div class="playlist-item__info">
+                            <span class="playlist-item__titel">naam nummer</span>
+                            <span class="playlist-item__artiest">naam artiest</span>
+                        </div>
+                        <span class="playlist-item__duur">4:30</span>
+                        <button class="playlist-item__opslaan" aria-label="opslaan">♡</button>
+                    </li>
+                    <li class="playlist-item">
+                        <span class="playlist-item__nummer">7</span>
+                        <div class="playlist-item__cover"></div>
+                        <div class="playlist-item__info">
+                            <span class="playlist-item__titel">naam nummer</span>
+                            <span class="playlist-item__artiest">naam artiest</span>
+                        </div>
+                        <span class="playlist-item__duur">3:55</span>
+                        <button class="playlist-item__opslaan" aria-label="opslaan">♡</button>
+                    </li>
+                    <li class="playlist-item">
+                        <span class="playlist-item__nummer">8</span>
+                        <div class="playlist-item__cover"></div>
+                        <div class="playlist-item__info">
+                            <span class="playlist-item__titel">naam nummer</span>
+                            <span class="playlist-item__artiest">naam artiest</span>
+                        </div>
+                        <span class="playlist-item__duur">2:47</span>
+                        <button class="playlist-item__opslaan" aria-label="opslaan">♡</button>
+                    </li>
+                    <li class="playlist-item">
+                        <span class="playlist-item__nummer">9</span>
+                        <div class="playlist-item__cover"></div>
+                        <div class="playlist-item__info">
+                            <span class="playlist-item__titel">naam nummer</span>
+                            <span class="playlist-item__artiest">naam artiest</span>
+                        </div>
+                        <span class="playlist-item__duur">3:33</span>
+                        <button class="playlist-item__opslaan" aria-label="opslaan">♡</button>
+                    </li>
+                    <li class="playlist-item">
+                        <span class="playlist-item__nummer">10</span>
+                        <div class="playlist-item__cover"></div>
+                        <div class="playlist-item__info">
+                            <span class="playlist-item__titel">naam nummer</span>
+                            <span class="playlist-item__artiest">naam artiest</span>
+                        </div>
+                        <span class="playlist-item__duur">4:15</span>
+                        <button class="playlist-item__opslaan" aria-label="opslaan">♡</button>
+                    </li>                                                                                                                                                                                    
+                </ul>
             </section>
         </main>
     </div>
+    
+    <script type="module" src="../js/app.js"></script>
+    <script type="module" src="../js/auth.js"></script>
+    <script type="module" src="../js/generate.js"></script>
 </body>
 </html>
