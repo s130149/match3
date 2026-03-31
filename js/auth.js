@@ -1,5 +1,6 @@
+
 const clientId = 'cfeb7e02981d4195b335a0f7045528ca';
-const redirectUri = 'http://127.0.0.1:5500/index.html';
+const redirectUri = 'http://127.0.0.1:5500/';
 
 const generateRandomString = (length) => {
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
