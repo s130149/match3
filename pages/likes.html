@@ -5,32 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet"> 
+    <link rel="icon" type="image/png" href="../images/icons/logo.png">   
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/search.css">
-    <title>Find Song</title>
+    <title>Music Match | Likes</title>
 </head>
 <body>
 
     <div id="add-collection-modal" class="modal-overlay">
         <div class="modal-content">
             <img src="../images/icons/close.png" alt="close-icon" id="add-close-btn" class="close-trigger">
-            <form action="" id="collection-form">
-                <h2>nieuwe collectie</h2>
-                <h3>naam</h3>
-                <input type="text" id="collection-input">
-            </form>
+            <h2>nieuwe collectie</h2>
+            <h3>naam</h3>
+            <input type="text" id="collection-input">
 
             <span class="error"></span>
 
             <div class="button-container">
-                <button id="add-cancel-btn" class="close-trigger">annuleer</button>
-                <button type="submit" form="collection-form" id="add-save-btn">bewaar</button>
+                <button type="button" id="add-cancel-btn" class="close-trigger">annuleer</button>
+                <button type="button" id="add-save-btn">bewaar</button>
             </div>
         </div>
     </div>
 
-    <div class="container">
+    <div id="quiz-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>ben je er klaar voor?</h2>
+            <p>luister naar de clip en probeer de artiest te raden!</p>
+            <div class="button-container">
+                <button type="button" id="quiz-start-btn">start quiz</button>
+                <button type="button" id="quiz-cancel-btn" class="close-trigger">annuleer</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container"> 
         <nav>
             <a href="home.html">
                 <div class="logo">
@@ -69,12 +78,12 @@
                         <li>
                             <a href="collections.html">
                                 <img src="../images/icons/collections.png" alt="collections icon" class="nav-icon">
-                                <span class="nav-label active">Alle collecties</span>
+                                <span class="nav-label">Alle collecties</span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="likes.html">
+                            <a href="library.html" class="active">
                                 <img src="../images/icons/likes.png" alt="likes icon" class="nav-icon">
                                 <span class="nav-label">Likes</span>
                             </a>
@@ -91,6 +100,7 @@
         </nav>
 
         <main class="main">
+
             <header>
                 <div class="header-center">
                     <a href="home.html">
@@ -104,15 +114,30 @@
                 </a>
             </header>
 
-            <section class="search-results">
-                <h1>Toon resultaten voor: <span id="search-input"></span></h1>
+            <section class="main-collection-header">
+                <img src="https://misc.scdn.co/liked-songs/liked-songs-300.png" alt="">
+
+                <div class="main-collection-wrapper">
+                    <h1 id="collection-title">likes</h1>
+
+                </div>
+ 
             </section>
+
+            <section class="main-collection-content">
+                <img src="../images/icons/musical-note.png" alt="">
+                <p>Je hebt nog geen liedjes toegevoegd</p>
+            </section>
+
         </main>
     </div>
-
+    
     <script type="module" src="../js/app.js"></script>
     <script type="module" src="../js/auth.js"></script>
     <script type="module" src="../js/collection.js"></script>
+    <script type="module" src="../js/collection-details.js"></script>
+    <script type="module" src="../js/search.js"></script>
     <script type="module" src="../js/profile.js"></script>
 </body>
 </html>
+

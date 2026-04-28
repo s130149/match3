@@ -7,19 +7,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">    
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/find-song.css">
-    <title>Find Song</title>
+    <title>Music Match | Home</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container"> 
         <nav>
             <div class="logo">
                 <img src="../images/icons/logo.png" alt="Logo">
-                <h1>Music Match</h1>
+                <h1>music match</h1>
             </div>
-            <ul>
+           <ul>
                 <li>
-                    <a href="home.html">
+                    <a href="home.html" class="active">
                         <img src="../images/icons/home.png" alt="home icon" class="nav-icon">
                         <span class="nav-label">start</span>
                     </a>
@@ -37,7 +36,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="guess-song.html" class="active">
+                    <a href="guess-song.html">
                         <img src="../images/icons/guess-song.png" alt="guess-Song icon" class="nav-icon">
                         <span class="nav-label">liedje raden</span>
                     </a>
@@ -60,21 +59,14 @@
             <header>
                 <input type="search" class="search" placeholder="Search">
             </header>
-            <section class="guess">
-                <img src="../images/blank-cover.jpg" alt="">
-
-                <p>_____  ________  ____</p>
-
-                <div class="media-player">
-                    <img src="../images/icons/skip.png" alt="" class="skip-backward">
-                    <img src="../images/icons/play.png" alt="">
-                    <img src="../images/icons/skip.png" alt="" class="skip-forward">
-                </div>
-
-                <input type="text" placeholder="" class="search-guess"/>
-                    
+            <section class="results">
+               
             </section>
         </main>
     </div>
+
+    <script type="module" src="../js/app.js"></script>
+    <script type="module" src="../js/auth.js"></script>
 </body>
 </html>
+
