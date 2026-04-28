@@ -42,11 +42,17 @@ async function getInfo() {
   const releaseCards = document.querySelectorAll(".card--release");
 
   releaseCards.forEach((card, index) => {
-    const img = card.querySelector("img");
-    const title = card.querySelector("h3");
+      const img = card.querySelector("img");
+      const title = card.querySelector("h3");
 
-    img.src = data.releases[index].image;
-    title.textContent = `${data.releases[index].artist} - ${data.releases[index].songTitle}`;
+      img.src = data.releases[index].image;
+      title.textContent = `${data.releases[index].artist} - ${data.releases[index].songTitle}`;
+
+      // 🔥 TOEVOEGEN: klik naar detailpagina
+      card.addEventListener("click", () => {
+          const id = data.releases[index].id;
+          window.location.href = `detail.html?id=${id}`;
+      });
   });
 
   // playlists
