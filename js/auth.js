@@ -1,3 +1,4 @@
+// https://developer.spotify.com/documentation/web-api/
 
 const clientId = 'cfeb7e02981d4195b335a0f7045528ca';
 const redirectUri = 'http://127.0.0.1:5500/';
@@ -61,14 +62,16 @@ async function getAccessToken(code) {
         })
     };
 
-    let response = await fetch('https://accounts.spotify.com/api/token', payload);
-    const data = await response.json();
+    const response = await fetch('https://accounts.spotify.com/api/token', payload);
 
-    if (data.refresh_token) {
-      localStorage.setItem('refresh_token', data.refresh_token);
+    if (!response.ok) {
+      console.error('Token request failed:', response.status, await response.text());
+      return null;
     }
 
-    localStorage.setItem('access_token', data.access_token);
+    const data = await response.json();
+    if (data.refresh_token) localStorage.setItem('refresh_token', data.refresh_token);
+    if (data.access_token) localStorage.setItem('access_token', data.access_token);
     return data.access_token;
 }
 
@@ -98,41 +101,55 @@ async function getRefreshToken(){
     return response.access_token;
 }
 
-async function getProfile() {
-  let accessToken = localStorage.getItem('access_token');
+export async function getProfile() {
+  const savedProfile = localStorage.getItem('user_profile');
 
-  let response = await fetch('https://api.spotify.com/v1/me', {
-    headers: {
-      Authorization: 'Bearer ' + accessToken
-    }
-  });
-
-  if (response.status === 401){
-    accessToken = await getRefreshToken();
-
-    response = await fetch('https://api.spotify.com/v1/me', {
-      headers: {
-        Authorization: 'Bearer ' + accessToken
-      }
-    });
+  if (savedProfile) {
+    return JSON.parse(savedProfile); 
   }
 
-  const data = await response.json();
-  return data;
+  let accessToken = localStorage.getItem('access_token');
+  if (!accessToken) {
+    return null;
+  } 
+
+  try {
+    let response = await fetch('https://api.spotify.com/v1/me', {
+      headers: { Authorization: 'Bearer ' + accessToken }
+    });
+
+    if (response.status === 401){
+      accessToken = await getRefreshToken();
+
+      response = await fetch('https://api.spotify.com/v1/me', {
+        headers: {
+          Authorization: 'Bearer ' + accessToken
+        }
+      });
+    }
+
+    const data = await response.json();
+
+    localStorage.setItem('user_profile', JSON.stringify(data));
+
+    return data;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
 }
 
 const urlParams = new URLSearchParams(window.location.search);
 let code = urlParams.get('code');
 
-async function init() {
+(async function init() {
   let accessToken = localStorage.getItem('access_token');
 
   if (code) {
     accessToken = await getAccessToken(code);
-
+    localStorage.removeItem('user_profile');
     window.history.replaceState({}, document.title, redirectUri);
-
-     if (accessToken) {
+    if (accessToken) {
       window.location.href = "pages/home.html";
       return;
     }
@@ -142,9 +159,5 @@ async function init() {
     const profile = await getProfile();
     console.log(profile);
   } 
-}
-
-init();
-
-// https://developer.spotify.com/documentation/web-api/
+})();
 

@@ -5,32 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet"> 
+    <link rel="icon" type="image/png" href="../images/icons/logo.png">   
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/search.css">
-    <title>Find Song</title>
+    <title>Music Match</title>
 </head>
 <body>
 
     <div id="add-collection-modal" class="modal-overlay">
         <div class="modal-content">
             <img src="../images/icons/close.png" alt="close-icon" id="add-close-btn" class="close-trigger">
-            <form action="" id="collection-form">
-                <h2>nieuwe collectie</h2>
-                <h3>naam</h3>
-                <input type="text" id="collection-input">
-            </form>
+            <h2>nieuwe collectie</h2>
+            <h3>naam</h3>
+            <input type="text" id="collection-input">
 
             <span class="error"></span>
 
             <div class="button-container">
-                <button id="add-cancel-btn" class="close-trigger">annuleer</button>
-                <button type="submit" form="collection-form" id="add-save-btn">bewaar</button>
+                <button type="button" id="add-cancel-btn" class="close-trigger">annuleer</button>
+                <button type="button" id="add-save-btn">bewaar</button>
             </div>
         </div>
     </div>
 
-    <div class="container">
+    <div id="delete-collection-modal" class="modal-overlay">
+        <div class="modal-content modal-content--delete">
+            <img src="../images/icons/close.png" alt="close-icon" id="delete-close-btn" class="close-trigger">
+            <h2>ben je zeker dat je deze collectie wil verwijderen?</h2>
+
+            <div class="button-container">
+                <button id="delete-cancel-btn" class="close-trigger">Annuleer</button>
+                <button type="button" id="confirm-delete-btn">Verwijder</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="edit-collection-modal" class="modal-overlay">
+        <div class="modal-content">
+            <img src="../images/icons/close.png" alt="close-icon" id="edit-close-btn" class="close-trigger">
+            <h2>collectie bewerken</h2>
+            <h3>naam</h3>
+            <input type="text" id="edit-collection-input" >
+
+            <span class="error"></span>
+
+            <div class="button-container">
+                <button type="button" id="edit-cancel-btn" class="close-trigger">annuleer</button>
+                <button type="button" id="edit-save-btn">bewaar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container"> 
         <nav>
             <a href="home.html">
                 <div class="logo">
@@ -42,7 +68,7 @@
            <ul class="nav-list">
 
                 <li>
-                    <a href="#" id="quiz-nav-item">
+                    <a href="quiz.html" id="quiz-nav-item">
                         <span class="nav-label">quiz</span>
                     </a>
                 </li>
@@ -69,7 +95,7 @@
                         <li>
                             <a href="collections.html">
                                 <img src="../images/icons/collections.png" alt="collections icon" class="nav-icon">
-                                <span class="nav-label active">Alle collecties</span>
+                                <span class="nav-label">Alle collecties</span>
                             </a>
                         </li>
 
@@ -91,6 +117,7 @@
         </nav>
 
         <main class="main">
+
             <header>
                 <div class="header-center">
                     <a href="home.html">
@@ -104,15 +131,40 @@
                 </a>
             </header>
 
-            <section class="search-results">
-                <h1>Toon resultaten voor: <span id="search-input"></span></h1>
+            <section class="main-collection-header">
+                <img src="../images/blank-cover.jpg" alt="">
+
+                <div class="main-collection-wrapper">
+                    <h1 id="collection-title"></h1>
+
+                    <div class="button-container">
+                        <button id="edit-collection-btn"><img src="../images/icons/edit.png" alt=""></button>
+
+                        <div id="collection-dropdown">
+                            <button id="delete-dropdown-btn">Collectie verwijderen</button>
+                            <button id="edit-dropdown-btn">Collectie bewerken</button>
+                        </div>
+
+                        <button id="collection-dropdown-btn"><img src="../images/icons/menu.png" alt=""></button>
+                    </div>
+                </div>
+ 
             </section>
+
+            <section class="main-collection-content">
+                <img src="../images/icons/musical-note.png" alt="">
+                <p>Je hebt nog geen liedjes toegevoegd</p>
+            </section>
+
         </main>
     </div>
-
+    
     <script type="module" src="../js/app.js"></script>
     <script type="module" src="../js/auth.js"></script>
     <script type="module" src="../js/collection.js"></script>
+    <script type="module" src="../js/collection-details.js"></script>
+    <script type="module" src="../js/search.js"></script>
     <script type="module" src="../js/profile.js"></script>
 </body>
 </html>
+

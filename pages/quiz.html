@@ -7,25 +7,40 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">    
     <link rel="stylesheet" href="../css/style.css">
-    <title>Profile</title>
+    <title>Music Match | Quiz</title>
 </head>
 <body>
 
     <div id="add-collection-modal" class="modal-overlay">
         <div class="modal-content">
             <img src="../images/icons/close.png" alt="close-icon" id="add-close-btn" class="close-trigger">
-            <form action="" id="collection-form">
-                <h2>nieuwe collectie</h2>
-                <h3>naam</h3>
-                <input type="text" id="collection-input">
-            </form>
+            <h2>nieuwe collectie</h2>
+            <h3>naam</h3>
+            <input type="text" id="collection-input">
 
             <span class="error"></span>
 
             <div class="button-container">
-                <button id="cancel-btn" class="close-trigger">Annuleer</button>
-                <button type="submit" form="collection-form" id="add-save-btn">Bewaar</button>
+                <button type="button" id="add-cancel-btn" class="close-trigger">annuleer</button>
+                <button type="button" id="add-save-btn">bewaar</button>
             </div>
+        </div>
+    </div>
+
+    <div id="quiz-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 id="modal-title">ben je er klaar voor?</h2>
+            <p id="modal-text">luister naar de clip en probeer de artiest te raden!</p>
+            <div class="button-container">
+                <button type="button" id="quiz-start-btn">start quiz</button>
+                <button type="button" id="quiz-cancel-btn" class="close-trigger">annuleer</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="countdown-container">
+        <div>
+             <h1 id="countdown">3</h1>
         </div>
     </div>
 
@@ -40,7 +55,7 @@
 
            <ul class="nav-list">
 
-                <li>
+                <li class="active">
                     <a href="quiz.html" id="quiz-nav-item">
                         <span class="nav-label">quiz</span>
                     </a>
@@ -104,84 +119,58 @@
                 </a>
             </header>
 
-            <section id="banner">
-                <img src="../images/default_profile.jpg" alt="Profiel foto" id="user-photo">
-                <div>
-                    <h2>profiel</h2>
-                    <h1 id="user-name"></h1>
+            <section class="quiz">
+                <div class="quiz-header">
+                    <div>
+                        <h2 class="section-title">quiz</h2>
+                        <p>Welk artiest is dit?</p>
+                    </div>
+                    
+
+                    <div class="score-container">
+                        <div> <img src="../images/icons/round.png" alt="Ronde icoon"> Ronde <span id="ronde"> 1/5</span></div>
+                        <div> <img src="../images/icons/score.png" alt="Score icoon"> Score <span id="score">0</span></div>
+                    </div>
+                   
                 </div>
-            </section>
-            <h2>artiesten die je volgt</h2>
-            <section class="artists">
-                <button class="card card--artist">
-                    <img src="../images/default_profile.jpg" alt="">
-                    <div class="card-content">
-                        <h3>artiest naam </h3> 
+               
+                <div class="quiz-container">
+                    <div class="blurred-cover">
+                         <img src="../images/covers/default-quiz.png" alt="">
                     </div>
-                </button>
-                <button class="card card--artist">
-                    <img src="../images/default_profile.jpg" alt="">
-                    <div class="card-content">
-                        <h3>artiest naam </h3> 
+                   
+                    <div class="button-container">
+                        <button class="quiz-option"> <div>A</div></button>
+                        <button class="quiz-option"> <div>B</div></button>
+                        <button class="quiz-option"> <div>C</div></button>
+                        <button class="quiz-option"> <div>D</div></button>
                     </div>
-                </button>
-                <button class="card card--artist">
-                    <img src="../images/default_profile.jpg" alt="">
-                    <div class="card-content">
-                        <h3>artiest naam </h3> 
+                </div>
+
+                <div class="timer-container">
+                    
+                    <div class="timer-content">
+                        <img src="../images/icons/timer.png" alt="">
+                        <div>
+                            <span id="timer">10 seconden</span>
+                            <p>resterende tijd</p>
+                        </div>
                     </div>
-                </button>
-                <button class="card card--artist">
-                    <img src="../images/default_profile.jpg" alt="">
-                    <div class="card-content">
-                        <h3>artiest naam </h3> 
+
+                    <div class="skip">
+                        <p>overslaan</p>
+                        <img src="../images/icons/skip.png" alt="">
                     </div>
-                </button>
-                <button class="card card--artist">
-                    <img src="../images/default_profile.jpg" alt="">
-                    <div class="card-content">
-                        <h3>artiest naam </h3> 
-                    </div>
-                </button>
-                <button class="card card--artist">
-                    <img src="../images/default_profile.jpg" alt="">
-                    <div class="card-content">
-                        <h3>artiest naam </h3> 
-                    </div>
-                </button>
-            </section>
-            <h2>opgeslagen nummers</h2>
-            <section class="releases">
-                <button class="card card--release" id="releases">
-                    <img src="" alt="">
-                    <div class="card-content">
-                        <h3></h3>
-                    </div>
-                </button>
-                <button class="card card--release">
-                    <img src="" alt="">
-                    <div class="card-content">
-                        <h3></h3>
-                    </div>
-                </button>
-                <button class="card card--release">
-                    <img src="" alt="">
-                    <div class="card-content">
-                        <h3></h3>
-                    </div>
-                </button>
-                <button class="card card--release">
-                    <img src="" alt="">
-                    <div class="card-content">
-                        <h3></h3>
-                    </div>
-                </button>
+                </div>
+                    
             </section>
         </main>
     </div>
+
+    <script type="module" src="../js/app.js"></script>
+    <script type="module" src="../js/auth.js"></script>
+    <script type="module" src="../js/collection.js"></script>
+    <script type="module" src="../js/quiz.js"></script>
+    <script type="module" src="../js/profile.js"></script>
 </body>
 </html>
-<script type="module" src="../js/app.js"></script>
-<script type="module" src="../js/auth.js"></script>
-<script type="module" src="../js/collection.js"></script>
-<script type="module" src="../js/profile.js"></script>
