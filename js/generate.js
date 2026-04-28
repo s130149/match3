@@ -43,38 +43,56 @@ async function generatePlaylist(mood) {
     const genre = moodGenres[mood];
 
     try {
-        const response = await fetch(`https://api.spotify.com/v1/search?q=${genre}&type=track&limit=10`, {
-            headers: {
-                Authorization: `Bearer ${token}`
+        const response = await fetch(
+            `https://api.spotify.com/v1/search?q=${genre}&type=track&limit=10`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             }
-        });
+        );
 
         const data = await response.json();
 
         playlistList.innerHTML = "";
 
         data.tracks.items.forEach((track, index) => {
+
+            // 🔧 element bouwen i.p.v. innerHTML string
             const li = document.createElement("li");
             li.classList.add("playlist-item");
 
-            li.innerHTML = `
-                <span class="playlist-item__nummer">${index + 1}</span>
-                <div class="playlist-item__cover">
-                    <img src="${track.album.images[0]?.url}" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">
-                </div>
-                <div class="playlist-item__info">
-                    <span class="playlist-item__titel">${track.name}</span>
-                    <span class="playlist-item__artiest">${track.artists[0].name}</span>
-                </div>
-                <span class="playlist-item__duur">${formatDuration(track.duration_ms)}</span>
-                <button class="playlist-item__opslaan">♡</button>
-            `;
+            const img = document.createElement("img");
+            img.src = track.album.images?.[0]?.url || "../images/blank-cover.jpg";
+            img.style.width = "50px";
+            img.style.height = "50px";
+            img.style.objectFit = "cover";
 
-            const saveBtn = li.querySelector(".playlist-item__opslaan");
+            const info = document.createElement("div");
+
+            const title = document.createElement("span");
+            title.textContent = track.name;
+
+            const artist = document.createElement("span");
+            artist.textContent = track.artists[0].name;
+
+            const duration = document.createElement("span");
+            duration.textContent = formatDuration(track.duration_ms);
+
+            const saveBtn = document.createElement("button");
+            saveBtn.textContent = "♡";
 
             saveBtn.addEventListener("click", () => {
                 saveBtn.classList.toggle("opgeslagen");
             });
+
+            info.appendChild(title);
+            info.appendChild(artist);
+
+            li.appendChild(img);
+            li.appendChild(info);
+            li.appendChild(duration);
+            li.appendChild(saveBtn);
 
             playlistList.appendChild(li);
         });

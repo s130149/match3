@@ -114,7 +114,7 @@ async function fetchSpotifyData() {
       })),
       artists: artistsResult.artists.items.map(artist => ({
         image: artist.images[0].url,
-        artist: artist.artists[0].name
+        artist: artist.name
       }))
     };
 
