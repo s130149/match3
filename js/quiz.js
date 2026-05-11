@@ -58,7 +58,7 @@ async function fetchQuizData(query) {
         
         const response = await fetch(proxy + encodeURIComponent(url));
 
-        if (response.status === 403 && !isRetry) {
+        if (response.status === 403) {
             console.warn(`Genre "${query}" gaf een 403. Andere genre proberen`);
             return await fetchQuizData(randomGenre);
         }
@@ -257,7 +257,7 @@ function endQuiz() {
     const modalText = document.getElementById('modal-text');
     const quizQuitBtn = document.getElementById('quiz-start-btn');
     
-    modalTitle.innerText = `Je score: ${score}`;
+    modalTitle.innerText = `Je score: ${score}/500`;
     
     if (score === 500) {
         modalText.innerHTML =  'Perfecte score!';

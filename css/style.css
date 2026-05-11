@@ -38,8 +38,12 @@ button {
 
 .container {
     display: grid;
-    grid-template-columns: 350px 1fr;
+    grid-template-columns: 270px 1fr;
     min-height: 100vh;
+}
+
+.container.detail-open {
+    grid-template-columns: 350px 1fr 350px;
 }
 
 .main {
@@ -82,8 +86,8 @@ header {
 
     background-color: #121212;
     z-index: 1;
-    padding-top: 10px;
-    padding-bottom: 20px;
+    padding-top: 5px;
+    padding-bottom: 10px;
 }
 
 .header-center {
@@ -249,6 +253,10 @@ nav .active, nav li a:hover {
     margin-left: 0;
 }
 
+.mobile-nav {
+    display: none;
+}
+
 /* #endregion */
 
 /* #region LOGO */
@@ -275,7 +283,7 @@ nav .active, nav li a:hover {
 
 /* #endregion */
 
-/* #region #LOGIN */
+/* #region LOGIN */
 
 .login-container {
     display: flex;
@@ -304,20 +312,29 @@ nav .active, nav li a:hover {
     text-transform: capitalize;
 }
 
-#login-btn {
+.login-btn {
     text-align: center;
     width: 220px;
     height: 30px;
-    margin-top: 70px;
     padding: 13px;
-    background: #4f02c4;
     border-radius: 5px;
     font-weight: bold;
     transition: ease-in-out .1s;
 }
 
-#login-btn:hover {
+#spotify-login-btn:hover {
     filter: brightness(120%);
+}
+
+#spotify-login-btn {
+    background: #4f02c4;
+    margin-top: 70px;
+    margin-bottom: 20px;
+}
+
+#guest-login-btn {
+    padding: 13px;
+    font-weight: bold;
 }
 
 /* #endregion */
@@ -336,7 +353,7 @@ nav .active, nav li a:hover {
     aspect-ratio: 1 / 1; 
     object-fit: cover;
     background-color: #fff;
-    box-shadow: 5px 5px 32px -1px rgba(0,0,0,0.72);
+    
     border-radius: 12px;
 }
 
@@ -380,6 +397,8 @@ nav .active, nav li a:hover {
 
 .card--recommendation {
     text-align: left;
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
 }
 
 .card--artist {
@@ -407,7 +426,6 @@ nav .active, nav li a:hover {
     background: linear-gradient(to bottom, #282828, #121212);
     padding-top: 50px;
     padding-left: 20px;
-
     border-radius: 20px;
 }
 
@@ -731,10 +749,11 @@ nav .active, nav li a:hover {
 }
 
 .playlist-section {
-  text-align: left;
-  padding-left: 40px;
-  margin-top: 30px;
-  padding-bottom: 100px;
+    display: none;
+    text-align: left;
+    padding-left: 40px;
+    margin-top: 30px;
+    padding-bottom: 100px;
 }
 
 .playlist-header {
@@ -1011,7 +1030,7 @@ nav .active, nav li a:hover {
     width: 100%;
     background-color: rgba(0, 0, 0, 0.263);
     backdrop-filter: blur(8px);
-    z-index: 2;
+    z-index: 3;
 }
 
 .modal-content{
@@ -1110,32 +1129,32 @@ nav .active, nav li a:hover {
     filter: brightness(130%);
 }
 
-#quiz-modal .modal-content .button-container {
+#quiz-modal .button-container, #spotify-required-modal .button-container {
     flex-direction: column;
     gap: 15px;   
     margin: 20px 0;
     align-items: center;
 }
 
-#quiz-modal .modal-content button {
+#quiz-modal button, #spotify-required-modal button {
     margin: 0;
     width: 100%;
     max-width: 350px;
 }
 
-#quiz-modal .close-trigger {
+#quiz-modal .close-trigger, #spotify-required-modal .close-trigger {
     text-decoration: underline;
     color: grey;
     background: transparent;
     border: none;
 }
 
-#quiz-modal h2{
+#modal-title {
     font-size: 30px;
     text-align: center;
 }
 
-#quiz-modal p{
+#modal-text {
     text-align: center;
     color: grey;
 }
@@ -1363,6 +1382,127 @@ nav .active, nav li a:hover {
 
 /* #endregion */
 
+/* #region DETAIL */
+
+.detail-header {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+
+}
+
+#detail-container {
+    display: none;
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 350px;
+    background-color: #121212;
+    z-index: 2;
+    padding: 10px;
+    margin-right: 20px;
+}
+
+#detail-close-btn {
+    cursor: pointer;
+    filter: opacity(50%);
+    height: 17px;
+    width: 17px;
+}
+
+.detail-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.detail-card img {
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 10px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.detail-info {
+    width: 100%; 
+    text-align: left;
+    margin-top: 15px;
+}
+
+.detail-info h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.detail-info p {
+    margin: 5px 0 0 0;
+    color: #b3b3b3;
+}
+
+.title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#likeBtn {
+    background: none;
+    border: none;
+    color: #b3b3b3;
+    cursor: pointer;
+}
+
+#likeBtn img{
+    object-fit: cover;
+    height: 20px;
+    width: 20px;
+}
+
+.artist-info {
+    width: 100%;
+    min-height: 200px;
+    text-align: left;
+    color: #b3b3b3;
+    padding: 5px 10px;
+    border-radius: 10px;
+    /*background-color: #232323;*/
+}
+
+.artist-info h3 {
+    font-size: 20px;
+    color: white;
+}
+
+#artist-info-content{
+    color: rgb(186, 186, 186);
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+#followers {
+    text-align: left;
+}
+
+/* #endregion */
+
+/* #region PLAYER */
+
+#player-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 2;
+    box-shadow: 0 4px 30px rgba(0, 0, 0);
+}
+
+/* #endregion PLAYER */
+
 @media (max-width: 1200px) {
     .container {
         grid-template-columns: 300px 1fr;
@@ -1378,15 +1518,50 @@ nav .active, nav li a:hover {
 }
 
 @media (max-width: 900px) {
+    .mobile-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 65px;
+        background-color: #1f1f1f;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 2000;
+        border-top: 1px solid #282828;
+    }
+
+    .mobile-nav a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #b3b3b3;
+        font-size: 10px;
+        transition: color 0.2s ease;
+    }
+
+    .mobile-nav a img {
+        width: 24px;
+        height: 24px;
+        margin-bottom: 4px;
+        filter: brightness(0.7);
+    }
+
+    .home-btn {
+        display: none;
+    }
+
+    .active {
+        filter: brightness(100);
+    }
+
     .container {
         grid-template-columns: 1fr;
     }
     
     nav {
-        display: none;
-    }
-
-    nav h1, .logo img{
         display: none;
     }
 

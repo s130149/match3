@@ -23,7 +23,7 @@ const base64encode = (input) => {
 }
 
 export async function authorizeSpotify() {
-    const scope = 'user-read-private user-read-email';
+    const scope = 'user-read-private user-read-email user-follow-read';
     const authUrl = new URL("https://accounts.spotify.com/authorize");
 
     const codeVerifier  = generateRandomString(64);

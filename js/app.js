@@ -1,108 +1,37 @@
 import { authorizeSpotify } from './auth.js';
 
-const loginBtn = document.getElementById('login-btn');
+const loginBtn = document.querySelectorAll('.login-btn');
+const mainContainer = document.querySelector('.container');
 
 if (loginBtn) {
-    loginBtn.addEventListener('click', () => {
-        authorizeSpotify();
+  loginBtn.forEach(btn => {
+    btn.addEventListener('click', () => {
+      authorizeSpotify();
     });
+  });
 }
-
-(async function getInfo() {
-  const cacheKey = 'spotify_data';
-  let data;
-
-  const cached = localStorage.getItem(cacheKey);
-  if (cached) {
-    const parsed = JSON.parse(cached);
-    const oneDay = 24 * 60 * 60 * 1000;
-    if (Date.now() - parsed.timestamp < oneDay) {
-      data = parsed.data;
-    }
-  }
-
-  if (!data) {
-    data = await fetchSpotifyData();
-  }
-
-  if (!data || !data.releases || !data.recommendations) return;
-
-  // Releases 
-
-  const releaseCards = document.querySelectorAll('.card--release');
-  releaseCards.forEach((card, index) => {
-    if (data.releases[index]) {
-      const img = card.querySelector('img');
-      const title = card.querySelector('h3');
-      img.src = data.releases[index].image;
-      title.textContent = `${data.releases[index].artist} - ${data.releases[index].title}`;
-    }
-  });
-
-  // Suggesties
-
-  const recommendationCards = document.querySelectorAll('.card--recommendation');
-  recommendationCards.forEach((card, index) => {
-    if (data.recommendations[index]) {
-      const img = card.querySelector('img');
-      const title = card.querySelector('h3');
-      img.src = data.recommendations[index].image;
-      title.textContent = `${data.recommendations[index].artist} - ${data.recommendations[index].title}`;
-    }
-  });
-
-  // Artiesten
-
-  const artistCards = document.querySelectorAll('.card--artist');
-  artistCards.forEach((card, index) => {
-    if (data.artists[index]) {
-      const img = card.querySelector('img');
-      const title = card.querySelector('h3');
-      img.src = data.artists[index].image;
-      title.textContent = `${data.artists[index].artist}`;
-    }
-  });
-
-  // Collecties
-
-  const playlistItems = document.querySelectorAll('.playlist-item');
-  playlistItems.forEach((item, index) => {
-    const title = item.querySelector('.playlist-item__titel');
-    const artist = item.querySelector('.playlist-item__artiest')
-    title.textContent = `${data.releases[index].title}`;
-    artist.textContent = `${data.releases[index].artist}`;
-  });
-})();
 
 async function fetchSpotifyData() {
   const accessToken = localStorage.getItem('access_token');
   if (!accessToken) return null;
 
   try {
+    const headers = { 'Authorization': `Bearer ${accessToken}` };
 
-    // Releases 
+    const [releasesResponse, recommendationsResponse, artistsResponse] = await Promise.all([
+      fetch('https://api.spotify.com/v1/search?q=year:2024&type=album&limit=4', { headers }),
+      fetch('https://api.spotify.com/v1/search?q=pop&type=album&limit=6', { headers }),
+      fetch('https://api.spotify.com/v1/search?q=pop&type=artist&limit=6', { headers })
+    ]);
 
-    const releasesResponse = await fetch('https://api.spotify.com/v1/search?q=year:2024&type=album&limit=4', {
-      headers: { 'Authorization': 'Bearer ' + accessToken }
-    });
     const releasesResult = await releasesResponse.json();
-
-    // Suggesties
-
-    const recommendationsResponse = await fetch('https://api.spotify.com/v1/search?q=pop&type=album&limit=6', {
-      headers: { 'Authorization': 'Bearer ' + accessToken }
-    });
     const recommendationsResult = await recommendationsResponse.json();
-
-    // Artiesten
-
-    const artistsResponse = await fetch('https://api.spotify.com/v1/search?q=pop&type=artist&limit=6', {
-      headers: { 'Authorization': 'Bearer ' + accessToken }
-    });
     const artistsResult = await artistsResponse.json();
 
     const formattedData =  {
       releases: releasesResult.albums.items.map(album => ({
+        artistId: album.artists[0].id,
+        trackId: album.id,
         image: album.images[0].url,
         artist: album.artists[0].name,
         title: album.name
@@ -126,12 +55,124 @@ async function fetchSpotifyData() {
     return formattedData;
 
   } catch (error) {
-    console.error("Netwerkfout:", error);
+    console.error("Fout bij Spotify fetch:", error);
     return null;
   }
 }
 
-// Modals sluiten 
+(async function getInfo() {
+  const cacheKey = 'spotify_data';
+  const cachedData = localStorage.getItem(cacheKey);
+  const songCards = document.querySelectorAll('.card--release');
+  const detailContainer = document.getElementById('detail-container');
+
+  let data;
+
+  if (cachedData) {
+    const parsedCache = JSON.parse(cachedData);
+    const isExpired = Date.now() - parsedCache.timestamp > 24 * 60 * 60 * 1000;
+    
+    if (!isExpired) {
+      data = parsedCache.data;
+    }
+  }
+
+  if (!data) {
+    data = await fetchSpotifyData();
+  }
+
+  songCards.forEach((card, index) => {
+    card.addEventListener('click', async () => {
+        const imgUrl = card.querySelector('img').src;
+        const fullTitle = card.querySelector('h3').textContent;
+        
+        const item = data.releases[index];
+
+        document.getElementById('cover').src = imgUrl;
+        document.getElementById('title').textContent = item.title;
+        document.getElementById('artist').textContent = item.artist;
+
+        if (detailContainer) {
+          mainContainer.classList.add('detail-open');
+          detailContainer.style.display = 'flex';
+        }
+
+        const token = localStorage.getItem('access_token');
+        const artistId = item.artistId;
+
+        try {
+          const artistResponse = await fetch(`https://api.spotify.com/v1/artists/${artistId}?cb=${Date.now()}`, {
+              headers: { 'Authorization': `Bearer ${token}` }
+          });
+          const artistData = await artistResponse.json();
+          const followers = artistData?.followers?.total;
+
+          if (followers) {
+            document.getElementById('followers').textContent = followers;
+          } 
+
+          if (item.trackId) {
+            playTrack(item.trackId);
+          }
+
+        } catch (error) {
+          console.log(error);
+        }
+     });
+  });
+
+  const releaseCards = document.querySelectorAll('.card--release');
+  const recommendationCards = document.querySelectorAll('.card--recommendation');
+  const artistCards = document.querySelectorAll('.card--artist');
+  const playlistItems = document.querySelectorAll('.playlist-item');
+
+  releaseCards.forEach((card, index) => {
+    if (data.releases[index]) {
+      const img = card.querySelector('img');
+      const title = card.querySelector('h3');
+      img.src = data.releases[index].image;
+      title.textContent = `${data.releases[index].artist} - ${data.releases[index].title}`;
+    }
+  });
+
+  recommendationCards.forEach((card, index) => {
+    if (data.recommendations[index]) {
+      const img = card.querySelector('img');
+      const title = card.querySelector('h3');
+      img.src = data.recommendations[index].image;
+      title.textContent = `${data.recommendations[index].artist} - ${data.recommendations[index].title}`;
+    }
+  });
+
+  artistCards.forEach((card, index) => {
+    if (data.artists[index]) {
+      const img = card.querySelector('img');
+      const title = card.querySelector('h3');
+      img.src = data.artists[index].image;
+      title.textContent = `${data.artists[index].artist}`;
+    }
+  });
+
+  playlistItems.forEach((item, index) => {
+    const title = item.querySelector('.playlist-item__titel');
+    const artist = item.querySelector('.playlist-item__artiest')
+    title.textContent = `${data.releases[index].title}`;
+    artist.textContent = `${data.releases[index].artist}`;
+  });
+})();
+
+
+function playTrack(trackId) {
+    const container = document.getElementById('player-container');
+    container.innerHTML = `
+        <iframe 
+            src="https://open.spotify.com/embed/album/${trackId}?utm_source=generator&theme=0" 
+            width="100%" 
+            height="80" 
+            frameBorder="0" 
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+        </iframe>`;
+}
 
 const closeButtons = document.querySelectorAll('.close-trigger');
 
@@ -141,15 +182,18 @@ closeButtons.forEach(btn => {
         const deleteModal = document.getElementById('delete-collection-modal');
         const editModal = document.getElementById('edit-collection-modal');
         const quizModal = document.getElementById('quiz-modal');
+        const detailWindow = document.getElementById('detail-container');
 
         if (addModal) addModal.style.display = 'none';
         if (deleteModal) deleteModal.style.display = 'none';
         if (editModal) editModal.style.display = 'none';
         if (quizModal) window.history.back();
+        if (detailWindow) {
+          mainContainer.classList.remove('detail-open');
+          detailWindow.style.display = 'none';
+        }
     });
 });
-
-// Search 
 
 window.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.querySelector('.search');
