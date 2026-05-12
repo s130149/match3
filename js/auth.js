@@ -1,7 +1,7 @@
 // https://developer.spotify.com/documentation/web-api/
 
 const clientId = 'cfeb7e02981d4195b335a0f7045528ca';
-const redirectUri = 'http://127.0.0.1:5500/';
+const redirectUri = 'http://127.0.0.1:3000/';
 
 const generateRandomString = (length) => {
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -48,31 +48,23 @@ export async function authorizeSpotify() {
 async function getAccessToken(code) {
     const codeVerifier = localStorage.getItem('code_verifier');
 
-    const payload = {
+    const response = await fetch('/api/token', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: new URLSearchParams({
-            client_id: clientId,
-            grant_type: 'authorization_code',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
             code: code,
-            redirect_uri: redirectUri,
             code_verifier: codeVerifier
         })
-    };
-
-    const response = await fetch('https://accounts.spotify.com/api/token', payload);
-
-    if (!response.ok) {
-      console.error('Token request failed:', response.status, await response.text());
-      return null;
-    }
+    });
 
     const data = await response.json();
-    if (data.refresh_token) localStorage.setItem('refresh_token', data.refresh_token);
-    if (data.access_token) localStorage.setItem('access_token', data.access_token);
-    return data.access_token;
+    
+    if (data.access_token) {
+        localStorage.setItem('access_token', data.access_token);
+        if (data.refresh_token) localStorage.setItem('refresh_token', data.refresh_token);
+        return data.access_token;
+    }
+    return null;
 }
 
 async function getRefreshToken(){

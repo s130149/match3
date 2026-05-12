@@ -101,14 +101,17 @@ async function fetchSpotifyData() {
         const artistId = item.artistId;
 
         try {
-          const artistResponse = await fetch(`https://api.spotify.com/v1/artists/${artistId}?cb=${Date.now()}`, {
+          const artistResponse = await fetch(`https://api.spotify.com/v1/artists/${artistId}`, {
               headers: { 'Authorization': `Bearer ${token}` }
           });
           const artistData = await artistResponse.json();
           const followers = artistData?.followers?.total;
+          console.log(followers); 
+          console.log(artistData); 
+          console.log(artistId);
 
           if (followers) {
-            document.getElementById('followers').textContent = followers;
+            document.getElementById('followers').textContent = followers.toLocaleString('nl-NL');
           } 
 
           if (item.trackId) {
@@ -160,7 +163,6 @@ async function fetchSpotifyData() {
     artist.textContent = `${data.releases[index].artist}`;
   });
 })();
-
 
 function playTrack(trackId) {
     const container = document.getElementById('player-container');
