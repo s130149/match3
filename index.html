@@ -10,19 +10,28 @@
 </head>
 <body>  
 
-    <div class="logo">
-        <img src="../images/icons/logo.png" alt="Logo">
-        <h1>music match</h1>
-    </div>
+    <div class="login-wrapper">
+        <div class="login-background">
+            <img src="images/misc/login-background.png" alt="">
+        </div>
 
-    <div class="login-container">
-        <h1>Welkom bij <br> <span>Music Match</span></h1>
-        <p>Ontdek en match jou perfecte sound.</p>
-        <button id="spotify-login-btn" class="login-btn">Aanmelden via Spotify</button>
+        <div class="login-container">
+            <div class="logo-box">
+                <img src="../images/icons/logo.png" alt="Logo">
+                <h2>music match</h2>
+            </div>
+            
+            <h1>Ontdek en match jouw <br> perfecte sound</h1>
+                        
+            <button id="login-btn">
+                <img src="images/icons/spotify.png" alt="spotify" id="spotify-icon">
+                Aanmelden via Spotify
+            </button>
+        </div>
     </div>
-
-    <script type="module" src="js/app.js"></script>
+    
     <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/index.js"></script>
 
 </body>
 </html>

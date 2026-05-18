@@ -7,9 +7,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">    
     <link rel="stylesheet" href="../css/style.css">
-    <title>Music Match | Quiz</title>
+    <title>Quiz</title>
 </head>
 <body>
+
+    <!-- Overlays -->
 
     <div id="add-collection-modal" class="modal-overlay">
         <div class="modal-content">
@@ -27,25 +29,27 @@
         </div>
     </div>
 
-    <div id="quiz-modal" class="modal-overlay">
-        <div class="modal-content">
-            <h2 id="modal-title">ben je er klaar voor?</h2>
-            <p id="modal-text">luister naar de clip en probeer de artiest te raden!</p>
-            <div class="button-container">
-                <button type="button" id="quiz-start-btn">start quiz</button>
-                <button type="button" id="quiz-cancel-btn" class="close-trigger">annuleer</button>
-            </div>
-        </div>
-    </div>
-
     <div id="countdown-container">
         <div>
              <h1 id="countdown">3</h1>
         </div>
     </div>
 
+     <div id="quiz-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 id="modal-title">score: 40/100</h2>
+            <p id="modal-text">Je kent je klassiekers!</p>
+            <div class="button-container">
+                <button type="button" id="quiz-start-btn">speel opnieuw</button>
+                <button type="button" id="quiz-cancel-btn" class="close-trigger">annuleer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+
     <div class="container">
-        <nav>
+        <header>
             <a href="home.html">
                 <div class="logo">
                     <img src="../images/icons/logo.png" alt="Logo">
@@ -53,9 +57,22 @@
                 </div>
             </a>
 
+            <div class="header-center">
+                <a href="home.html">
+                    <div class="home-btn" class="home-btn-inactive"><img src="../images/icons/home-inactive.png" alt="home icon"></div>
+                </a>
+                <input type="search" class="search" placeholder="Search">
+            </div>
+
+            <a href="profile.html">
+                <div class="profile-btn"><img src="../images/covers/default_profile.jpg" alt="profile icon" id="header-user-photo" class="user-photo"></div>
+            </a>
+        </header>
+
+        <nav>
            <ul class="nav-list">
 
-                <li class="active">
+                <li>
                     <a href="quiz.html" id="quiz-nav-item">
                         <span class="nav-label">quiz</span>
                     </a>
@@ -63,20 +80,20 @@
 
                 <li>
                     <a href="generate.html">
-                        <span class="nav-label">genereer</span>
+                        <span class="nav-label">mood</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="compare.html">
-                        <span class="nav-label">vergelijken</span>
+                        <span class="nav-label">match</span>
                     </a>
                 </li>
 
                 <div class="collection-container">
                     <div class="nav-collection-header">
                         <span>collecties</span>
-                        <button id="add-collection-btn">+</button>
+                        <button id="add-collection-btn" class="requires-spotify">+</button>
                     </div>
 
                    <ul class="nav-collection-list">
@@ -88,7 +105,7 @@
                         </li>
 
                         <li>
-                            <a href="library.html">
+                            <a href="likes.html">
                                 <img src="../images/icons/likes.png" alt="likes icon" class="nav-icon">
                                 <span class="nav-label">Likes</span>
                             </a>
@@ -104,41 +121,33 @@
            </ul>
         </nav>
 
-        <main class="main">
+        <main class="main" id="quiz">
 
-            <header>
-                <div class="header-center">
-                    <a href="home.html">
-                        <div class="home-btn" class="home-btn-inactive"><img src="../images/icons/home-inactive.png" alt="home icon"></div>
-                    </a>
-                    <input type="search" class="search" placeholder="Search">
-                </div>
-
-                <a href="profile.html">
-                    <div class="profile-btn"><img src="../images/default_profile.jpg" alt="profile icon" id="header-user-photo"></div>
-                </a>
-            </header>
-
-            <section class="quiz">
+            <section id="quiz-game">
                 <div class="quiz-header">
-                    <div>
-                        <h2 class="section-title">quiz</h2>
-                        <p>Welk artiest is dit?</p>
-                    </div>
-                    
+                    <div class="quiz-title">
+                        <h1>Welk artiest is dit?</h1>
+                    </div>              
 
                     <div class="score-container">
-                        <div> <img src="../images/icons/round.png" alt="Ronde icoon"> Ronde <span id="ronde"> 1/5</span></div>
-                        <div> <img src="../images/icons/score.png" alt="Score icoon"> Score <span id="score">0</span></div>
+                        <div> Ronde <span id="ronde"> 1/5</span></div>
+                        <div> Score <span id="score">0</span></div>
                     </div>
-                   
+                    
                 </div>
-               
-                <div class="quiz-container">
-                    <div class="blurred-cover">
-                         <img src="../images/covers/default-quiz.png" alt="">
+
+                <div class="timer-wrapper">
+                    <div class="dotted-outer-ring"></div>
+                    
+                    <div class="timer-container">
+                        <div class="timer-circle">
+                            <div class="pause-icon"></div>
+                        </div>
+                        <div class="dotted-outer-ring"></div>
                     </div>
-                   
+                </div>
+                
+                <div class="quiz-container">
                     <div class="button-container">
                         <button class="quiz-option"> <div>A</div></button>
                         <button class="quiz-option"> <div>B</div></button>
@@ -146,31 +155,61 @@
                         <button class="quiz-option"> <div>D</div></button>
                     </div>
                 </div>
+            </section>
 
-                <div class="timer-container">
-                    
-                    <div class="timer-content">
-                        <img src="../images/icons/timer.png" alt="">
-                        <div>
-                            <span id="timer">10 seconden</span>
-                            <p>resterende tijd</p>
+           <section id="quiz-lobby">
+                <div id="lobby-content">
+                    <h1>muziek <span>quiz</span></h1>
+                    <img src="../images/covers/default-quiz-lobby.png" alt="" id="lobby-cover">
+                    <h2>Klaar voor de challenge?</h2>
+                    <p>Probeer de artiesten te raden om je <br> muziek kennis te testen</p>
+                    <button id="quiz-start-btn">Starten</button>
+                </div>
+
+                <div id="scoreboard">
+                
+                    <div class="player-score-container">
+                        <div class="player-score-content">
+                            <img src="../images/icons/first-place.png" alt="trophy" class="trophy">
+                            <img src="../images/covers/default_profile.jpg" alt="user-photo" class="quiz-user-photo">
+                            <p class="username"></p>
+                        </div>
+                        <div class="score">
+                            <p>0 pt</p>
                         </div>
                     </div>
 
-                    <div class="skip">
-                        <p>overslaan</p>
-                        <img src="../images/icons/skip.png" alt="">
+                    <div class="player-score-container">
+                        <div class="player-score-content">
+                            <img src="../images/icons/second-place.png" alt="trophy" class="trophy">
+                            <img src="../images/covers/default-quiz.png" alt="user-photo" class="quiz-user-photo">
+                            <p class="username">---</p>
+                        </div>
+                        <div class="score">
+                            <p>0 pt</p>
+                        </div>
+                        
                     </div>
+
+                    <div class="player-score-container">
+                        <div class="player-score-content">
+                            <img src="../images/icons/third-place.png" alt="trophy" class="trophy">
+                            <img src="../images/covers/default-quiz.png" alt="user-photo" class="quiz-user-photo">
+                            <p class="username">---</p>
+                        </div>
+                        <div class="score">
+                            <p>0 pt</p>
+                        </div>
+                            
+                    </div>
+
                 </div>
-                    
+                
             </section>
         </main>
     </div>
 
     <script type="module" src="../js/app.js"></script>
-    <script type="module" src="../js/auth.js"></script>
-    <script type="module" src="../js/collection.js"></script>
     <script type="module" src="../js/quiz.js"></script>
-    <script type="module" src="../js/profile.js"></script>
 </body>
 </html>
