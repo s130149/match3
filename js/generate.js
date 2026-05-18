@@ -19,28 +19,29 @@ moodButtons.forEach(button => {
         const mood = button.dataset.mood;
 
         playlistMoodLabel.textContent = mood;
-
-        moodSection.classList.add("hidden");
-        playlistSection.classList.remove("hidden");
+        moodSection.style.display = "none";
+        playlistSection.style.display = "block";
 
         generatePlaylist(mood);
     });
 });
 
 btnTerug.addEventListener("click", () => {
-    playlistSection.classList.add("hidden");
-    moodSection.classList.remove("hidden");
+    playlistSection.style.display = "none";
+    moodSection.style.display = "block";
 });
 
 async function generatePlaylist(mood) {
     const token = localStorage.getItem("access_token");
 
     if (!token) {
-        console.error("Geen Spotify token gevonden");
+        playlistList.innerHTML = "<li>Je moet eerst inloggen met Spotify.</li>";
         return;
     }
 
     const genre = moodGenres[mood];
+
+    playlistList.innerHTML = "<li>Playlist wordt geladen...</li>";
 
     try {
         const response = await fetch(
@@ -53,52 +54,41 @@ async function generatePlaylist(mood) {
         );
 
         const data = await response.json();
-
         playlistList.innerHTML = "";
 
         data.tracks.items.forEach((track, index) => {
-
-            // 🔧 element bouwen i.p.v. innerHTML string
             const li = document.createElement("li");
             li.classList.add("playlist-item");
 
-            const img = document.createElement("img");
-            img.src = track.album.images?.[0]?.url || "../images/blank-cover.jpg";
-            img.style.width = "50px";
-            img.style.height = "50px";
-            img.style.objectFit = "cover";
+            li.innerHTML = `
+                <span class="playlist-item__nummer">${index + 1}</span>
+                <img class="playlist-item__cover" src="${track.album.images[0]?.url || "../images/blank-cover.jpg"}" alt="${track.name}">
+                <div class="playlist-item__info">
+                    <span class="playlist-item__titel">${track.name}</span>
+                    <span class="playlist-item__artiest">${track.artists[0].name}</span>
+                </div>
+                <span class="playlist-item__duur">${formatDuration(track.duration_ms)}</span>
+                <button class="playlist-item__opslaan" aria-label="opslaan">♡</button>
+            `;
 
-            const info = document.createElement("div");
-
-            const title = document.createElement("span");
-            title.textContent = track.name;
-
-            const artist = document.createElement("span");
-            artist.textContent = track.artists[0].name;
-
-            const duration = document.createElement("span");
-            duration.textContent = formatDuration(track.duration_ms);
-
-            const saveBtn = document.createElement("button");
-            saveBtn.textContent = "♡";
+            const saveBtn = li.querySelector(".playlist-item__opslaan");
 
             saveBtn.addEventListener("click", () => {
                 saveBtn.classList.toggle("opgeslagen");
+
+                if (saveBtn.classList.contains("opgeslagen")) {
+                    saveBtn.textContent = "♥";
+                } else {
+                    saveBtn.textContent = "♡";
+                }
             });
-
-            info.appendChild(title);
-            info.appendChild(artist);
-
-            li.appendChild(img);
-            li.appendChild(info);
-            li.appendChild(duration);
-            li.appendChild(saveBtn);
 
             playlistList.appendChild(li);
         });
 
     } catch (error) {
         console.error("Playlist fout:", error);
+        playlistList.innerHTML = "<li>Er ging iets mis bij het genereren van de playlist.</li>";
     }
 }
 

@@ -1489,6 +1489,49 @@ nav .active, nav li a:hover {
 
 /* #endregion */
 
+/* search */
+
+.results-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 25px;
+    max-width: 700px;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px;
+    border-radius: 10px;
+    background-color: #1a1a1a;
+    cursor: pointer;
+}
+
+.search-result-item:hover {
+    background-color: #242424;
+}
+
+.search-result-item img {
+    width: 55px;
+    height: 55px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.search-result-item h3 {
+    margin: 0;
+    color: white;
+    font-size: 16px;
+}
+
+.search-result-item p {
+    margin: 5px 0 0 0;
+    color: #b3b3b3;
+    font-size: 14px;
+}
+
 /* #region PLAYER */
 
 #player-container {
