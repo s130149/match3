@@ -11,6 +11,8 @@
     <title>Home</title>
 </head>
 <body>
+    
+    <!-- Overlays -->
 
     <div id="add-collection-modal" class="modal-overlay">
         <div class="modal-content">
@@ -30,26 +32,73 @@
 
     <aside id="detail-container">
         <div class="detail-card">
-            <img src="../images/blank-cover.jpg" id="cover">
+            <img src="../images/covers/blank-cover.jpg" id="cover">
 
             <div class="detail-info">
                 <div class="title-wrapper">
                      <h2 id="title">Titel</h2>
-                     <button id="likeBtn"><img src="../images/icons/not-liked.png" alt=""></button>
                 </div>
                
                 <p id="artist">Artiest</p>
+
+                <div class="detail-btn-container">
+                    <button id="like-btn">
+                        <img src="../images/icons/not-liked.png" alt="like">
+                    </button>
+
+                    <button id="add-to-collection-btn" class="add-to-collection-dropdown-btn">
+                        <img src="../images/icons/add-to-collection.png" alt="add">
+                    </button>
+
+                     <div id="add-to-collection-dropdown" class="dropdown">
+                        <p>Toevoegen aan collectie</p>
+                     </div>
+                    
+                </div>
+               
             </div>
             
-            <div class="artist-info">
-                <p><span id="followers"></span> volgers</p>
-                <p id="artist-info-content">
-                </p>
+            <div id="lyrics-container">
+                <div id="lyrics-header">
+                    <p id="lyrics-title">Lyrics</p>
+                </div>
+                
+                <div id="lyrics-text">
+
+                </div>
             </div>
         </div>
     </aside>
 
-    <div id="player-container">
+    <div class="playback-bar">
+        <input type="range" id="progress-bar" min="0" max="100" value="0">
+    </div>
+
+    <div id="player-container" class="spotify-player">
+        <div class="player-info">
+            <img id="player-img" src="../images/covers/default-playing-img.png" alt="">
+            <div>
+            <h4 id="player-title"></h4>
+            <p id="player-artist"></p>
+            </div>
+        </div>
+
+        <div class="player-controls">
+            <button id="prev-btn" class="control-btn">
+                <img src="../images/icons/previous.png" alt="previous">
+            </button>
+            <button id="play-pause-btn" class="control-btn">
+                <img src="../images/icons/play.png" alt="play">
+            </button>
+            <button id="next-btn" class="control-btn">
+                <img src="../images/icons/next.png" alt="next">
+            </button>
+        </div>
+
+        <div class="volume-container">
+            <img src="../images/icons/volume.png" alt="volume" id="volume">
+            <input type="range" id="volume-slider" min="0" max="100" value="50">
+        </div>
     </div>
 
     <div class="mobile-nav">
@@ -75,15 +124,29 @@
         </a>
     </div>
 
+    <!-- Main content -->
+
     <div class="container"> 
-        <nav>
+        <header>
             <a href="home.html">
                 <div class="logo">
                     <img src="../images/icons/logo.png" alt="Logo">
                     <h1>music match</h1>
                 </div>
             </a>
+            <div class="header-center">
+                <a href="home.html">
+                    <div class="home-btn"><img src="../images/icons/home.png" alt="home icon"></div>
+                </a>
+                <input type="search" class="search" placeholder="Search">
+            </div>
 
+            <a href="profile.html">
+                <div class="profile-btn"><img src="../images/covers/default_profile.jpg" alt="profile icon" id="header-user-photo" class="user-photo"></div>
+            </a>
+        </header>
+
+        <nav>
            <ul class="nav-list">
 
                 <li>
@@ -93,21 +156,21 @@
                 </li>
 
                 <li>
-                    <a href="generate.html" class="requires-spotify">
-                        <span class="nav-label">genereer</span>
+                    <a href="generate.html">
+                        <span class="nav-label">mood</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="compare.html" class="requires-spotify">
-                        <span class="nav-label">vergelijken</span>
+                    <a href="compare.html">
+                        <span class="nav-label">match</span>
                     </a>
                 </li>
 
                 <div class="collection-container">
                     <div class="nav-collection-header">
                         <span>collecties</span>
-                        <button id="add-collection-btn" class="requires-spotify">+</button>
+                        <button id="add-collection-btn"">+</button>
                     </div>
 
                    <ul class="nav-collection-list">
@@ -134,162 +197,178 @@
 
            </ul>
         </nav>
+        
+        <main id="home">
+            <h2 class="section-title">nieuwe releases</h2>
 
-        <main class="main">
-
-            <header>
-                <div class="header-center">
-                    <a href="home.html">
-                        <div class="home-btn"><img src="../images/icons/home.png" alt="home icon"></div>
-                    </a>
-                    <input type="search" class="search" placeholder="Search">
+            <section id="releases" class="song-container">
+                
+                <div class="card card--release song-card">
+                    <img src="" alt="cover" class="card-cover"> 
+                    <div class="card-content">
+                        <h3></h3>
+                    </div>
+                    <button class="play-card-btn">
+                        <img src="../images/icons/play-card-btn.png" alt="play">
+                    </button>
                 </div>
 
-                <a href="profile.html">
-                    <div class="profile-btn requires-spotify"><img src="../images/default_profile.jpg" alt="profile icon" id="header-user-photo"></div>
-                </a>
-            </header>
-
-                <h2 class="section-title">nieuwe releases</h2>
-
-                <section class="releases">
-                    
-                    <button class="card card--release">
-                        <img src="" alt="">
-                        <div class="card-content">
-                            <h3></h3>
-                        </div>
+                <div class="card card--release song-card">
+                    <img src="" alt="cover" class="card-cover">
+                    <div class="card-content">
+                        <h3></h3>
+                    </div>
+                    <button class="play-card-btn">
+                        <img src="../images/icons/play-card-btn.png" alt="play">
                     </button>
+                </div>
 
-                    <button class="card card--release">
-                        <img src="" alt="">
-                        <div class="card-content">
-                            <h3></h3>
-                        </div>
+                <div class="card card--release song-card">
+                    <img src="" alt="cover" class="card-cover">
+                    <div class="card-content">
+                        <h3></h3>
+                    </div>
+                    <button class="play-card-btn">
+                        <img src="../images/icons/play-card-btn.png" alt="play">
                     </button>
+                </div>
 
-                    <button class="card card--release">
-                        <img src="" alt="">
-                        <div class="card-content">
-                            <h3></h3>
-                        </div>
+                <div class="card card--release song-card">
+                    <img src="" alt="cover" class="card-cover">
+                    <div class="card-content">
+                        <h3></h3>
+                    </div>
+                    <button class="play-card-btn">
+                        <img src="../images/icons/play-card-btn.png" alt="play">
                     </button>
+                </div>
 
-                    <button class="card card--release">
-                        <img src="" alt="">
-                        <div class="card-content">
-                            <h3></h3>
-                        </div>
+            </section>
+
+            <h2 class="section-title">suggesties</h2>
+
+            <section id="recommendations">
+                <div class="card card--recommendation song-card">
+                    <img src="" alt="">
+                    <div class="card-content">
+                        <h3></h3>
+                        <h3></h3>
+                    </div>
+                    <button class="play-card-btn">
+                        <img src="../images/icons/play-card-btn.png" alt="play">
                     </button>
+                </div>
 
-                </section>
-
-                <h2 class="section-title">suggesties</h2>
-
-                <section class="recommendations">
-                    <button class="card card--recommendation">
-                        <img src="" alt="">
-                        <div class="card-content">
-                            <h3></h3>
-                            <h3></h3>
-                        </div>
+                <div class="card card--recommendation song-card">
+                    <img src="" alt="">
+                    <div class="card-content">
+                        <h3></h3>
+                        <h3></h3>
+                    </div>
+                    <button class="play-card-btn">
+                        <img src="../images/icons/play-card-btn.png" alt="play">
                     </button>
+                </div>
 
-                    <button class="card card--recommendation">
-                        <img src="" alt="">
-                        <div class="card-content">
-                            <h3></h3>
-                            <h3></h3>
-                        </div>
+                <div class="card card--recommendation song-card">
+                    <img src="" alt="">
+                    <div class="card-content">
+                        <h3></h3>
+                        <h3></h3>
+                    </div>
+                    <button class="play-card-btn">
+                        <img src="../images/icons/play-card-btn.png" alt="play">
                     </button>
+                </div>
 
-                    <button class="card card--recommendation">
-                        <img src="" alt="">
-                        <div class="card-content">
-                            <h3></h3>
-                            <h3></h3>
-                        </div>
+                <div class="card card--recommendation song-card">
+                    <img src="" alt="">
+                    <div class="card-content">
+                        <h3></h3>
+                        <h3></h3>
+                    </div>
+                    <button class="play-card-btn">
+                        <img src="../images/icons/play-card-btn.png" alt="play">
                     </button>
+                </div>
 
-                    <button class="card card--recommendation">
-                        <img src="" alt="">
-                        <div class="card-content">
-                            <h3></h3>
-                            <h3></h3>
-                        </div>
+                <div class="card card--recommendation song-card">
+                    <img src="" alt="">
+                    <div class="card-content">
+                        <h3></h3>
+                        <h3></h3>
+                    </div>
+                    <button class="play-card-btn">
+                        <img src="../images/icons/play-card-btn.png" alt="play">
                     </button>
+                </div>
 
-                    <button class="card card--recommendation">
-                        <img src="" alt="">
-                        <div class="card-content">
-                            <h3></h3>
-                            <h3></h3>
-                        </div>
+                <div class="card card--recommendation song-card">
+                    <img src="" alt="">
+                    <div class="card-content">
+                        <h3></h3>
+                        <h3></h3>
+                    </div>
+                    <button class="play-card-btn">
+                        <img src="../images/icons/play-card-btn.png" alt="play">
                     </button>
+                </div>
 
-                    <button class="card card--recommendation">
-                        <img src="" alt="">
-                        <div class="card-content">
-                            <h3></h3>
-                            <h3></h3>
-                        </div>
-                    </button>
+            </section>
 
-                </section>
+            <h2 class="section-title">artiesten voor jou</h2>
+            <section class="artists">
 
-                <h2 class="section-title">artiesten voor jou</h2>
-                <section class="artists">
+                <button class="card card--artist">
+                    <img src="../images/covers/default_profile.jpg" alt="">
+                    <div class="card-content">
+                        <h3>artiest naam </h3> 
+                    </div>
+                </button>
 
-                    <button class="card card--artist">
-                        <img src="../images/default_profile.jpg" alt="">
-                        <div class="card-content">
-                            <h3>artiest naam </h3> 
-                        </div>
-                    </button>
+                <button class="card card--artist">
+                    <img src="../images/covers/default_profile.jpg" alt="">
+                    <div class="card-content">
+                        <h3>artiest naam </h3> 
+                    </div>
+                </button>
 
-                    <button class="card card--artist">
-                        <img src="../images/default_profile.jpg" alt="">
-                        <div class="card-content">
-                            <h3>artiest naam </h3> 
-                        </div>
-                    </button>
+                <button class="card card--artist">
+                    <img src="../images/covers/default_profile.jpg" alt="">
+                    <div class="card-content">
+                        <h3>artiest naam </h3> 
+                    </div>
+                </button>
 
-                    <button class="card card--artist">
-                        <img src="../images/default_profile.jpg" alt="">
-                        <div class="card-content">
-                            <h3>artiest naam </h3> 
-                        </div>
-                    </button>
+                <button class="card card--artist">
+                    <img src="../images/covers/default_profile.jpg" alt="">
+                    <div class="card-content">
+                        <h3>artiest naam </h3> 
+                    </div>
+                </button>
 
-                    <button class="card card--artist">
-                        <img src="../images/default_profile.jpg" alt="">
-                        <div class="card-content">
-                            <h3>artiest naam </h3> 
-                        </div>
-                    </button>
+                <button class="card card--artist">
+                    <img src="../images/covers/default_profile.jpg" alt="">
+                    <div class="card-content">
+                        <h3>artiest naam </h3> 
+                    </div>
+                </button>
 
-                    <button class="card card--artist">
-                        <img src="../images/default_profile.jpg" alt="">
-                        <div class="card-content">
-                            <h3>artiest naam </h3> 
-                        </div>
-                    </button>
+                <button class="card card--artist">
+                    <img src="../images/covers/default_profile.jpg" alt="">
+                    <div class="card-content">
+                        <h3>artiest naam </h3> 
+                    </div>
+                </button>
 
-                    <button class="card card--artist">
-                        <img src="../images/default_profile.jpg" alt="">
-                        <div class="card-content">
-                            <h3>artiest naam </h3> 
-                        </div>
-                    </button>
-
-                </section>
+            </section>
         </main>
     </div>
     
     <script type="module" src="../js/app.js"></script>
-    <script type="module" src="../js/auth.js"></script>
-    <script type="module" src="../js/profile.js"></script>
-    <script type="module" src="../js/collection.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
 </body>
 </html>
 
