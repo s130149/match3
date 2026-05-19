@@ -305,6 +305,7 @@ nav .active, nav li a:hover {
 /* #region HOME */
 
 #home {
+    padding-bottom: 150px;
     background: linear-gradient(to bottom, #282828 0%, #121212 40%, #121212 100%);
 }
 
@@ -473,10 +474,6 @@ nav .active, nav li a:hover {
     text-align: center;
 }
 
-.card--artist:last-of-type {
-    margin-bottom: 250px;
-}
-
 .card--artist img, .card--followed-artist img {
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -521,6 +518,7 @@ nav .active, nav li a:hover {
 /* #region PROFILE */
 
 #profile {
+    padding-bottom: 150px;
     background: linear-gradient(to bottom, #282828 0%, #121212 40%, #121212 100%);
 }
 
@@ -1029,6 +1027,11 @@ nav .active, nav li a:hover {
     width: 100%;
 }
 
+#collection-title {
+    font-size: 50px;
+}
+
+
 #likes-container, #collection-tracks-container {
     display: none;
     grid-template-columns: 1fr;
@@ -1231,12 +1234,12 @@ nav .active, nav li a:hover {
     transition: ease-in-out .1s;
 }
 
-#delete-dropdown-btn:hover, #confirm-delete-btn:hover{
+#delete-dropdown-btn:hover, #confirm-delete-btn:hover {
     color: white;
     background-color: rgb(216, 20, 20);
 }
 
-#edit-dropdown-btn:hover{
+#edit-dropdown-btn:hover {
     background-color: #4a4a4a;
 }
 
@@ -1853,7 +1856,7 @@ nav .active, nav li a:hover {
 .collection-option {
     display: flex;
     align-items: center;
-    width: 150px;
+    width: 100%;
 }
 
 #add-to-collection-dropdown {
@@ -1866,11 +1869,14 @@ nav .active, nav li a:hover {
     height: 40px;
     padding: 0 30px;
     border-radius: 5px;
+    width: 100%;
 }
 
 #add-to-collection-dropdown p {
+    display: flex;
+    align-items: center;
     color: grey;
-    padding: 20px 0;
+    padding: 20px 30px;
     margin: 0px;
 }
 
@@ -1933,7 +1939,7 @@ nav .active, nav li a:hover {
 
 /* #endregion */
 
-/* search */
+/* #region SEARCH */
 
 .results-list {
     display: flex;
@@ -1975,6 +1981,8 @@ nav .active, nav li a:hover {
     color: #b3b3b3;
     font-size: 14px;
 }
+
+/* #endregion */
 
 /* #region PLAYER */
 
@@ -2182,6 +2190,10 @@ nav .active, nav li a:hover {
     }
 
     /* PROFILE */
+
+    #profile {
+        padding-bottom: 220px;
+    }
 
     #profile-header img {
         width: 175px;

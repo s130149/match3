@@ -7,6 +7,7 @@ let score = 0;
 let timeLeft = 10;
 let maxRounds = 5;
 let timerInterval = null;
+let timerCircle = null;
 let selectedOptionId = null;
 let countdownInterval = null;
 
@@ -136,7 +137,7 @@ async function startTimer(correctId) {
   clearInterval(timerInterval);
 
   const currentTrack = quizData.releases[currentRound - 1];
-  const timerCircle = document.querySelector('.timer-circle');
+  timerCircle = document.querySelector('.timer-circle');
 
   if (currentTrack.preview_url) {
     quizAudio.src = currentTrack.preview_url;
@@ -272,6 +273,8 @@ function endQuiz(finalScore) {
         localStorage.setItem('quizHighScore', finalScore);
   }
 
+  const quizRestartBtn = document.getElementById('quiz-restart-btn');
+
   const modalTitle = document.getElementById('modal-title');
   const modalText = document.getElementById('modal-text');
 
@@ -285,8 +288,8 @@ function endQuiz(finalScore) {
     modalText.innerHTML = 'Nog even oefenen...';
   }
 
-  quizStartBtn.innerHTML = 'Speel Opnieuw';
-  quizStartBtn.onclick = () => resetQuiz();
+  quizRestartBtn.innerHTML = 'Speel Opnieuw';
+  quizRestartBtn.onclick = () => resetQuiz();
 
   document.getElementById('quiz-modal').style.display = 'flex';
 }
