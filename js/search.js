@@ -4,7 +4,39 @@ const resultsList = document.getElementById("results-list");
 
 let debounceTimer;
 
+if (searchInput) {
+    searchInput.addEventListener("input", () => {
+        clearTimeout(debounceTimer);
+
+        const query = searchInput.value.trim();
+
+        debounceTimer = setTimeout(() => {
+            if (query === "") return;
+
+            if (!resultsList || !searchTitle) {
+                window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+            } else {
+                searchTitle.textContent = query;
+                window.history.replaceState(null, "", `search.html?q=${encodeURIComponent(query)}`);
+                searchSpotify(query);
+            }
+        }, 1000);
+    });
+
+    searchInput.addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+            const query = searchInput.value.trim();
+
+            if (query !== "") {
+                window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+            }
+        }
+    });
+}
+
 window.addEventListener("DOMContentLoaded", () => {
+    if (!resultsList || !searchTitle || !searchInput) return;
+
     const urlParams = new URLSearchParams(window.location.search);
     const query = urlParams.get("q");
 
@@ -13,24 +45,6 @@ window.addEventListener("DOMContentLoaded", () => {
         searchTitle.textContent = query;
         searchSpotify(query);
     }
-});
-
-searchInput.addEventListener("input", () => {
-    clearTimeout(debounceTimer);
-
-    const query = searchInput.value.trim();
-
-    debounceTimer = setTimeout(() => {
-        if (query === "") {
-            searchTitle.textContent = "";
-            resultsList.innerHTML = "";
-            return;
-        }
-
-        searchTitle.textContent = query;
-        window.history.replaceState(null, "", `search.html?q=${encodeURIComponent(query)}`);
-        searchSpotify(query);
-    }, 1000);
 });
 
 async function searchSpotify(query) {
@@ -52,8 +66,8 @@ async function searchSpotify(query) {
         );
 
         const data = await response.json();
-
         renderResults(data);
+
     } catch (error) {
         console.error("Fout bij zoeken:", error);
         resultsList.innerHTML = "<p>Er ging iets mis bij het zoeken.</p>";
@@ -67,7 +81,7 @@ function renderResults(data) {
     const artists = data.artists.items;
 
     tracks.forEach(track => {
-        const image = track.album.images[0]?.url || "../images/blank-cover.jpg";
+        const image = track.album.images[0]?.url || "../images/covers/blank-cover.png";
 
         resultsList.innerHTML += `
             <div class="search-result-item">
@@ -81,7 +95,7 @@ function renderResults(data) {
     });
 
     artists.forEach(artist => {
-        const image = artist.images[0]?.url || "../images/default_profile.jpg";
+        const image = artist.images[0]?.url || "../images/covers/default_profile.jpg";
 
         resultsList.innerHTML += `
             <div class="search-result-item">
